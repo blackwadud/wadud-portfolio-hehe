@@ -184,6 +184,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 /* ===== the title is grabbable ===== */
 .hero{cursor:grab}
 .hero.dragging{cursor:grabbing}
+.hero.dragging *{user-select:none;-webkit-user-select:none}
 .hero a,.hero button{cursor:pointer}
 .hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
 .grab-hint{font-size:11px;letter-spacing:.14em;color:var(--dim);opacity:0;
@@ -1090,6 +1091,7 @@ async function initGL(){
   ========================================================== */
   let bust = null, bustReady = 0, bustH = 1.9;   // measured height of the export
   const bustLook = {x:0, y:0};
+  let bustSpinY = 0, bustSpinX = 0;   // the orientation you leave it in, kept
 
   // lit separately from the point clouds — additive points ignore lights,
   // so these only ever touch the marble
@@ -1160,16 +1162,23 @@ async function initGL(){
     bust = wrap;
   })();
 
-  function stepBust(crisp){
+  function stepBust(hero){
     if(!bust) return;
-    bustReady = lerp(bustReady, crisp, .045);          // fades in, then out on scroll
+    // 'hero' is 1 while the name is formed and 0 once you have scrolled on,
+    // so the bust is fully lit at the top of the page and fades as you leave
+    bustReady = lerp(bustReady, hero, .05);
 
     // watch the pointer: yaw follows x, a little pitch from y
-    bustLook.y = lerp(bustLook.y, -sm.x * .62, .055);
-    bustLook.x = lerp(bustLook.x,  sm.y * .30, .055);
+    bustLook.y = lerp(bustLook.y, -sm.x * .78, .06);
+    bustLook.x = lerp(bustLook.x,  sm.y * .34, .06);
 
-    bust.rotation.y = bustLook.y + orbY * 1.35;        // hand-spin rides on top
-    bust.rotation.x = bustLook.x + orbX * .8;
+    // the title's orbit springs back to face-on, but the head should stay
+    // wherever you put it — so accumulate the same deltas without the return
+    bustSpinY += orbVY * 1.9;
+    bustSpinX = clamp(bustSpinX + orbVX * 1.1, -.9, .9);
+
+    bust.rotation.y = bustLook.y + bustSpinY;
+    bust.rotation.x = bustLook.x + bustSpinX;
     bust.position.y = -.18 + Math.sin(uni.uTime.value * .35) * .045;   // slow breath
     bust.visible = bustReady > .01;
 
@@ -1223,6 +1232,7 @@ async function initGL(){
       dragging = true; grabbed = true; moved = 0;
       hero.classList.add('dragging');
       hero.setPointerCapture?.(e.pointerId);
+      e.preventDefault();
       orbVX = orbVY = 0;
       if(hint){ hint.classList.add('gone'); touched = true; }
     });
@@ -1317,7 +1327,7 @@ async function initGL(){
     burst *= .93;
     uni.uEnergy.value = smEnergy + burst * 1.5;
 
-    stepBust(crisp);
+    stepBust(hold);
 
     const churn = Math.min(1, Math.abs(phaseVel) * 22);
     spin += (.0016 + smEnergy * .006 + churn * .012) * crisp;
