@@ -37,19 +37,13 @@ body:not(.gl-on) .hero-role{display:none}
 .row .stackline{transform:translate3d(var(--tx3,0),0,0)}
 
 
-/* ===== corner shortcuts, once the intro is out of the way ===== */
-.corner{position:fixed;bottom:22px;z-index:60;display:flex;align-items:center;gap:20px}
-.corner.cl{left:var(--gut)}
-.corner.cr{right:var(--gut)}
-.corner .jump{font-size:11px;letter-spacing:.16em;color:var(--dim);display:flex;align-items:center;
-  gap:10px;padding-bottom:3px;border-bottom:1px solid transparent;transition:.35s;
-  opacity:0;transform:translateY(8px);pointer-events:none}
-.corner .jump.show{opacity:1;transform:none;pointer-events:auto}
-.corner .jump:hover{color:var(--ink);border-bottom-color:var(--amber)}
-.corner .jump i{width:16px;height:1px;background:var(--dim);display:block;transition:.35s;flex:none}
-.corner .jump:hover i{background:var(--amber);width:26px}
-#form{position:static;left:auto;bottom:auto}
-@media(max-width:860px){.corner{display:none}}
+/* ===== the two shortcuts, sat with the copy they point at ===== */
+.hero-left{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.jump{font-size:11.5px;letter-spacing:.16em;color:var(--dim);display:flex;align-items:center;
+  gap:11px;padding-bottom:3px;border-bottom:1px solid transparent;transition:.35s;width:fit-content}
+.jump:hover{color:var(--ink);border-bottom-color:var(--amber)}
+.jump i{width:18px;height:1px;background:var(--dim);display:block;transition:.35s;flex:none}
+.jump:hover i{background:var(--amber);width:30px}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -271,13 +265,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 
 <div id="cur"></div><div id="dot"></div>
 <div id="bar"></div>
-<div class="corner cl" id="navL">
-  <a class="jump" href="#work"><i></i>Projects</a>
-  <div id="form"><i></i><span id="formName">TITLE</span></div>
-</div>
-<div class="corner cr" id="navR">
-  <a class="jump" href="#experience">Experience<i></i></a>
-</div>
+<div id="form"><i></i><span id="formName">TITLE</span></div>
 
 <div class="topbar">
   <div class="tb-id"><span class="tb-name">Abdulwadud Bakare</span><span class="tb-role">Systems Engineer</span></div>
@@ -298,9 +286,13 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
   <h1><span>Abdulwadud Bakare</span><span class="thin">Systems Engineer</span></h1>
   <div class="hero-role" id="heroRole">Systems&nbsp;Engineer</div>
   <div class="hero-foot">
-    <p id="heroP">Five years building software that has to hold: <em>distributed backends, mission-critical aviation platforms, and mobile products that ship to real users.</em> Based in Nagoya, Japan.</p>
+    <div class="hero-left">
+      <p id="heroP">Five years building software that has to hold: <em>distributed backends, mission-critical aviation platforms, and mobile products that ship to real users.</em> Based in Nagoya, Japan.</p>
+      <a class="jump" id="jumpExp" href="#experience"><i></i>Experience</a>
+    </div>
     <div class="hero-right">
       <div class="grab-hint" id="grabHint">Drag to spin · click to shatter</div>
+      <a class="jump" id="jumpWork" href="#work">Projects<i></i></a>
       <div class="cue" id="heroCue"><i></i> Scroll</div>
     </div>
   </div>
@@ -1118,6 +1110,12 @@ async function initGL(){
   const LOOK_Z = 1.2;                 // depth of the plane the cursor is treated as on
   const gazePt = new THREE.Vector3();
   const gazeDir = new THREE.Vector3();
+  let gazeLock = null;          // {x,y} in NDC when something asks to be looked at
+
+  // anything on the page can pull the head's attention to itself
+  window.setGazeTarget = (x, y) => {
+    gazeLock = (x === null || x === undefined) ? null : {x, y};
+  };
 
   // lit separately from the point clouds — additive points ignore lights,
   // so these only ever touch the marble
@@ -1198,8 +1196,13 @@ async function initGL(){
     // Put the pointer on a plane between the camera and the bust, work out
     // where that is in world space, then aim the head at it. The model faces
     // +Z, so yaw is atan2 across x/z and pitch is the rise over the flat run.
-    bustPtr.x = lerp(bustPtr.x, ptr.x, .12);
-    bustPtr.y = lerp(bustPtr.y, ptr.y, .12);
+    // a locked target wins over the cursor, and it turns a touch slower so
+    // the movement reads as deliberate rather than twitchy
+    const gx = gazeLock ? gazeLock.x : ptr.x;
+    const gy = gazeLock ? gazeLock.y : ptr.y;
+    const follow = gazeLock ? .065 : .12;
+    bustPtr.x = lerp(bustPtr.x, gx, follow);
+    bustPtr.y = lerp(bustPtr.y, gy, follow);
 
     gazePt.set(bustPtr.x, bustPtr.y, .5).unproject(cam);
     gazeDir.copy(gazePt).sub(cam.position).normalize();
@@ -1423,8 +1426,9 @@ initGL().catch(err => {
 /* ==========================================================
    3. PRELOADER
 ========================================================== */
-['heroP','heroCue'].forEach(id => {
+['heroP','heroCue','jumpExp','jumpWork'].forEach(id => {
   const el = document.getElementById(id);
+  if(!el) return;
   el.style.opacity = 0;
   el.style.transform = 'translateY(22px)';
 });
@@ -1461,13 +1465,40 @@ initGL().catch(err => {
       role.style.transition = 'opacity 1s var(--ease) 1.25s, transform 1s var(--ease) 1.25s';
       requestAnimationFrame(() => { role.style.opacity = 1; role.style.transform = 'none'; });
     }
-    ['heroP','heroCue'].forEach((id, i) => {
+    ['heroP','heroCue','jumpExp','jumpWork'].forEach((id, i) => {
       const el = document.getElementById(id);
+      if(!el) return;
       el.style.transition = 'opacity .9s var(--ease), transform .9s var(--ease)';
-      el.style.transitionDelay = (1.5 + i * .12) + 's';
+      el.style.transitionDelay = (1.5 + i * .1) + 's';
       el.style.opacity = 1;
       el.style.transform = 'none';
     });
+  }
+})();
+
+/* ==========================================================
+   THE HEAD FOLLOWS YOUR INTENT
+   Reaching for a shortcut turns the bust to look at it, so it
+   points where you were already heading. Letting go hands its
+   attention back to the cursor.
+========================================================== */
+(function(){
+  const pullers = [...document.querySelectorAll('.jump')];
+  if(!pullers.length) return;
+
+  const aim = el => {
+    if(!window.setGazeTarget) return;
+    const r = el.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    window.setGazeTarget((cx / innerWidth) * 2 - 1, -((cy / innerHeight) * 2 - 1));
+  };
+  const release = () => window.setGazeTarget && window.setGazeTarget(null);
+
+  for(const el of pullers){
+    el.addEventListener('pointerenter', () => aim(el));
+    el.addEventListener('focus', () => aim(el));
+    el.addEventListener('pointerleave', release);
+    el.addEventListener('blur', release);
   }
 })();
 
@@ -1477,16 +1508,6 @@ initGL().catch(err => {
 Scroll.on((y, vel) => {
   document.getElementById('bar').style.width = (y / (Scroll.max() || 1) * 100) + '%';
 });
-
-// the corner links wait for the hero to clear, so they don't crowd the intro
-(function(){
-  const jumps = [...document.querySelectorAll('.corner .jump')];
-  if(!jumps.length) return;
-  Scroll.on(y => {
-    const on = y > innerHeight * .55;
-    for(const j of jumps) j.classList.toggle('show', on);
-  });
-})();
 
 const io = new IntersectionObserver(es => {
   es.forEach(e => {
@@ -1902,7 +1923,7 @@ const MQ_JA = "話しましょう <b></b> はじめまして <b></b> 一緒に�
 const I18N_SEL = '.tag, .hero-top, .cue, .grab-hint, .hero-role, .about h2, #moreBtn, .more p, .facts dt, .facts dd, ' +
   '.row-cat, .stackline, .row-links a, .job h3, .job .co, .job time, .job p, .exp-lead, ' +
   '.lat-lead, .lat-h, #padRef dt, .cta-lead p, .contact-grid dt, .contact-grid dd, ' +
-  '.contact-grid a, .topbar a.link, .corner .jump';
+  '.contact-grid a, .topbar a.link, .jump';
 
 function setLang(next){
   LANG = next;
