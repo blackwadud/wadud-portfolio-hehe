@@ -318,7 +318,6 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
     <div><dt>Based in</dt><dd>Nagoya, Aichi, Japan</dd></div>
     <div><dt>Currently</dt><dd>Systems Engineer at FundastA, contributing to aviation systems for a major Japanese aerospace client</dd></div>
     <div><dt>Languages</dt><dd>English — native / fluent<br>Japanese — beginner</dd></div>
-    <div><dt>Education</dt><dd>Advanced Diploma in Software Engineering, Aptech Computer Education, 2018–2021</dd></div>
   </dl>
 </section>
 
@@ -1148,7 +1147,7 @@ async function initGL(){
         await MeshoptDecoder.ready;               // surfaces worker failures here
         loader.setMeshoptDecoder(MeshoptDecoder);
       }
-      return loader.loadAsync(useMeshopt ? 'bust.glb' : 'bust-plain.glb');
+      return loader.loadAsync(useMeshopt ? 'face.glb' : 'face-plain.glb');
     }
 
     let gltf = null;
@@ -1174,12 +1173,17 @@ async function initGL(){
     wrap.scale.setScalar((innerWidth < 760 ? 2.1 : 3.0) / bustH);
     wrap.position.set(0, -.18, -1.35);            // sits behind the name
 
+    // the export carries positions only — no normals, no material — so the
+    // surface has to be derived here or it renders as a flat silhouette
+    const stone = new THREE.MeshStandardMaterial({
+      color: 0xEFE3D1, roughness: .72, metalness: 0,
+      transparent: true, opacity: 0, flatShading: false
+    });
     model.traverse(o => {
-      if(!o.isMesh || !o.material) return;
+      if(!o.isMesh) return;
       o.castShadow = o.receiveShadow = false;
-      o.material.transparent = true;
-      o.material.opacity = 0;
-      o.material.envMapIntensity = .4;
+      if(o.geometry && !o.geometry.attributes.normal) o.geometry.computeVertexNormals();
+      o.material = stone;
     });
 
     scene.add(wrap);
@@ -1232,7 +1236,7 @@ async function initGL(){
     bust.visible = bustReady > .01;
 
     bust.traverse(o => {
-      if(o.isMesh && o.material) o.material.opacity = bustReady * .96;
+      if(o.isMesh && o.material) o.material.opacity = bustReady * .97;
     });
     key.intensity  = 2.5 * bustReady;
     rim.intensity  = 14 * bustReady;
@@ -1810,8 +1814,6 @@ const JA = {
     "FundastA システムエンジニア。日本の大手航空宇宙企業向けの航空システムを担当。",
   "English — native / fluentJapanese — beginner":
     "英語 — ネイティブ／流暢<br>日本語 — 初級",
-  "Advanced Diploma in Software Engineering, Aptech Computer Education, 2018–2021":
-    "Aptech Computer Education ソフトウェア工学 上級ディプロマ（2018–2021年）",
   "SG 01 SaaS / E-signature and contract management":
     "<u>SG 01</u> SaaS / 電子署名・契約管理",
   "Contract drafting, signing and tracking for the Japanese market. AI-assisted drafts, drag-and-drop signature fields, audit trails and tamper-evident PDFs. Built at FundastA.":
