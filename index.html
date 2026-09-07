@@ -22,6 +22,21 @@
   --gut:clamp(20px,5.5vw,90px);
   --ease:cubic-bezier(.16,1,.3,1);
 }
+html{scroll-behavior:smooth}
+
+/* ===== the role, given its own line under the name ===== */
+.hero-role{font-family:Anybody,sans-serif;font-weight:300;font-variation-settings:"wdth" 104;
+  font-size:clamp(22px,4.6vw,72px);line-height:.98;letter-spacing:.10em;color:var(--ink);
+  margin-top:clamp(10px,2vh,20px);white-space:nowrap}
+body:not(.gl-on) .hero-role{display:none}
+
+
+/* ===== projects: titles drift left to right as you scroll them past ===== */
+.row h3{transform:translate3d(var(--tx,0),0,0);will-change:transform}
+.row-cat,.row-yr{transform:translate3d(var(--tx2,0),0,0)}
+.row .stackline{transform:translate3d(var(--tx3,0),0,0)}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--void);color:var(--ink);font:300 17px/1.6 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body.lock{overflow:hidden;height:100vh}
@@ -32,7 +47,7 @@ a{color:inherit;text-decoration:none}
 
 #gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}
 #veil{position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(125% 90% at 50% 42%,transparent 48%,rgba(10,7,4,.50) 80%,rgba(10,7,4,.88) 100%)}
+  background:radial-gradient(130% 95% at 50% 42%,transparent 54%,rgba(10,7,4,.42) 82%,rgba(10,7,4,.84) 100%)}
 .page{position:relative;z-index:2}
 
 #pre{position:fixed;inset:0;z-index:200;background:var(--void);display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:var(--gut);transition:opacity .8s,visibility .8s}
@@ -101,91 +116,29 @@ section{padding:clamp(90px,15vh,190px) var(--gut);position:relative}
 .facts dt{font-size:11.5px;letter-spacing:.13em;color:var(--dim);margin-bottom:10px}
 .facts dd{font-size:15px;line-height:1.75}
 
-/* ===== WORK: pinned, scrubbed ===== */
-#work{padding:0}
-.stage-outer{position:relative}
-.stage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;
-  padding:clamp(90px,13vh,140px) var(--gut) clamp(50px,8vh,80px)}
-.stage-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex:none;z-index:3}
-.stage-count{font-family:Anybody,sans-serif;font-weight:800;font-variation-settings:"wdth" 124;
-  font-size:clamp(28px,4vw,58px);line-height:.9;font-variant-numeric:tabular-nums;color:var(--amber)}
-.stage-count s{text-decoration:none;color:var(--dim);font-size:.42em;margin-left:6px}
-.stage-body{flex:1;position:relative}
-.pc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
-  will-change:transform,opacity;pointer-events:none}
-.pc.live{pointer-events:auto}
-.pc h3{font-size:clamp(38px,10.5vw,150px);font-weight:800;font-variation-settings:"wdth" 126;
-  line-height:.92;margin-bottom:20px}
-.pc h3 .ch{display:inline-block;will-change:transform,opacity}
-.row-cat{font-size:11.5px;letter-spacing:.13em;color:var(--dim);display:flex;gap:14px;align-items:baseline;margin-bottom:26px;flex-wrap:wrap}
-.row-cat u{text-decoration:none;color:var(--amber);font-variant-numeric:tabular-nums}
-.stage-yr{font-size:12px;color:var(--dim);letter-spacing:.06em;font-variant-numeric:tabular-nums;margin-left:auto}
-.stackline{font-size:15px;color:var(--dim);max-width:56ch;line-height:1.6}
-.row-links{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap}
-.row-links a{font-size:12.5px;letter-spacing:.08em;color:var(--dim);border:1px solid var(--edge);padding:9px 18px;border-radius:30px;transition:.35s}
-.row-links a:hover{color:var(--ink);border-color:var(--amber);background:rgba(255,176,58,.10)}
-.stage-rail{flex:none;display:flex;gap:6px;margin-top:26px;z-index:3}
-.stage-rail b{flex:1;height:2px;background:var(--edge);position:relative;overflow:hidden;cursor:pointer}
-.stage-rail b::after{content:"";position:absolute;inset:0;background:var(--amber);
-  transform:scaleX(var(--f,0));transform-origin:left}
-@media(max-width:720px){.pc h3{font-size:clamp(34px,12vw,80px)}}
-
 /* ===== experience ===== */
-.exp-grid{display:grid;grid-template-columns:minmax(230px,30%) 1fr;gap:clamp(24px,5vw,80px);align-items:start}
-.exp-rail{position:sticky;top:24vh}
-.exp-count{display:flex;align-items:baseline;gap:8px;font-size:12px;color:var(--dim);letter-spacing:.1em;margin-bottom:20px;font-variant-numeric:tabular-nums}
-.exp-count b{font-family:Anybody,sans-serif;font-weight:800;font-size:clamp(30px,4vw,54px);color:var(--amber);font-variation-settings:"wdth" 122;line-height:.9}
-.exp-count s{text-decoration:none}
-.exp-co{font-family:Anybody,sans-serif;font-weight:600;font-size:clamp(24px,3.3vw,44px);font-variation-settings:"wdth" 118;line-height:1.02;margin-bottom:14px}
-.exp-role{font-size:15px;color:var(--ink);margin-bottom:4px}
-.exp-time{font-size:12.5px;color:var(--dim);letter-spacing:.05em;font-variant-numeric:tabular-nums}
-.exp-body{position:relative;padding-left:clamp(20px,3vw,44px);transform:skewY(var(--sk,0deg));transform-origin:left center}
-.exp-spine{position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--edge)}
-.exp-spine-fill{position:absolute;left:0;top:0;width:1px;height:var(--fill,0%);
-  background:linear-gradient(var(--ember),var(--amber));box-shadow:0 0 12px rgba(255,176,58,.55)}
-.job{position:relative;display:block;padding:clamp(26px,3.4vw,40px) 0;border-bottom:1px solid var(--edge);
-  transition:opacity .9s var(--ease),transform .9s var(--ease),background .5s}
-.job:first-of-type{border-top:1px solid var(--edge)}
-.job:hover{background:linear-gradient(90deg,rgba(210,69,30,.07),transparent 60%)}
-.job-head{display:none}
-.exp-node{position:absolute;left:calc(clamp(20px,3vw,44px) * -1 - 4px);top:clamp(30px,3.6vw,44px);
-  width:9px;height:9px;border-radius:50%;background:var(--void);border:1px solid var(--edge);transition:.45s var(--ease)}
-.job.here .exp-node{background:var(--amber);border-color:var(--amber);box-shadow:0 0 14px var(--amber);transform:scale(1.45)}
-.job h3{font-size:clamp(21px,2.9vw,36px);font-weight:600;margin-bottom:6px}
-.job .co{font-size:13.5px;color:var(--amber);letter-spacing:.05em;margin-bottom:16px}
-.job .co s{color:var(--dim);text-decoration:none}
-.job time{font-size:12.5px;color:var(--dim);letter-spacing:.05em;font-variant-numeric:tabular-nums}
-.job ul{list-style:none;display:grid;gap:9px;max-width:62ch}
-.job li{font-size:15.2px;color:var(--dim);padding-left:20px;position:relative;line-height:1.62;
-  opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.job.in li{opacity:1;transform:none}
-.job li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:1px;background:var(--ember)}
-.job li b{color:var(--ink);font-weight:400}
-@media(max-width:900px){
-  .exp-grid{grid-template-columns:1fr}
-  .exp-rail{display:none}
-  .job-head{display:block;margin-bottom:16px}
-  .job-head time{display:block;margin-bottom:8px}
-  .exp-body{padding-left:20px}
-}
-
-.tk{border-top:1px solid var(--edge)}
-.tk-row{display:grid;grid-template-columns:clamp(130px,17vw,220px) 1fr;gap:clamp(16px,3vw,40px);
-  align-items:center;border-bottom:1px solid var(--edge);padding:clamp(14px,2vw,22px) 0;
-  transition:opacity .9s var(--ease),transform .9s var(--ease),background .45s}
-.tk-row:hover{background:linear-gradient(90deg,rgba(210,69,30,.10),transparent 70%)}
-.tk-label{font-size:12px;letter-spacing:.13em;color:var(--dim);transition:color .35s}
-.tk-row:hover .tk-label{color:var(--ink)}
-.tk-view{overflow:hidden;position:relative;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 92%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 92%,transparent)}
-.tk-track{display:flex;width:max-content;will-change:transform}
-.tk-track i{font-style:normal;display:flex;align-items:center}
-.tk-track em{font-style:normal;font-family:Anybody,sans-serif;font-weight:400;
-  font-size:clamp(17px,2.3vw,30px);font-variation-settings:"wdth" 110;white-space:nowrap;transition:color .35s}
-.tk-row:hover .tk-track em{color:var(--amber)}
-.tk-track b{width:6px;height:6px;border-radius:50%;background:var(--ember);margin:0 clamp(14px,2vw,26px);flex:none}
-@media(max-width:720px){.tk-row{grid-template-columns:1fr;gap:10px}}
+.exp-list{border-top:1px solid var(--edge)}
+.job{position:relative;display:block;border-bottom:1px solid var(--edge);
+  padding:clamp(26px,3.6vw,46px) 0;transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.job-head{display:block}
+.job-top{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:16px}
+.job h3{font-size:11.5px;letter-spacing:.13em;color:var(--dim);font-family:Sora,sans-serif;
+  font-weight:400;line-height:1.6;display:flex;gap:14px;align-items:baseline;margin:0;
+  transform:translate3d(var(--tx2,0),0,0)}
+.job h3 u{text-decoration:none;color:var(--amber);font-variant-numeric:tabular-nums}
+.job time{font-size:12px;color:var(--dim);letter-spacing:.06em;white-space:nowrap;
+  font-variant-numeric:tabular-nums;transform:translate3d(var(--tx2,0),0,0);display:block}
+.job .co{font-family:Anybody,sans-serif;font-weight:800;font-variation-settings:"wdth" 124;
+  font-size:clamp(28px,5.6vw,84px);line-height:.94;letter-spacing:-.015em;color:var(--ink);
+  margin:0;transition:color .45s var(--ease);transform:translate3d(var(--tx,0),0,0);will-change:transform}
+.job:hover .co{color:var(--amber)}
+.job .co s{text-decoration:none;color:var(--dim);font-family:Sora,sans-serif;font-weight:300;
+  font-size:clamp(12px,1.05vw,15px);letter-spacing:.06em;display:block;margin-top:12px}
+.job p{font-size:16.2px;line-height:1.72;color:var(--dim);max-width:62ch;margin-top:20px;
+  transform:translate3d(var(--tx3,0),0,0);
+  opacity:0;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.job.in p{opacity:1}
+.job p b{color:var(--ink);font-weight:400}
 
 .lat-lead{max-width:52ch;color:var(--dim);font-size:16px;margin-bottom:clamp(30px,5vh,54px)}
 .lat{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,60px)}
@@ -230,7 +183,6 @@ section{padding:clamp(90px,15vh,190px) var(--gut);position:relative}
 footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:26px var(--gut) 40px;border-top:1px solid var(--edge);font-size:12px;letter-spacing:.07em;color:var(--dim)}
 footer b{font-weight:400;font-variant-numeric:tabular-nums}
 
-
 /* ===== the title is grabbable ===== */
 .hero{cursor:grab}
 .hero.dragging{cursor:grabbing}
@@ -245,19 +197,47 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 @keyframes hintPulse{0%,100%{transform:scale(.7);opacity:.5}50%{transform:scale(1.15);opacity:1}}
 @media(hover:none),(max-width:860px){.grab-hint{display:none}}
 
+/* ===== identity, given room ===== */
+.tb-id{line-height:1.25}
+.tb-name{font-family:Anybody,sans-serif;font-weight:600;font-variation-settings:"wdth" 116;
+  font-size:clamp(19px,2.3vw,32px);letter-spacing:-.015em;color:var(--ink);display:block}
+.tb-role{font-size:clamp(12.5px,1.05vw,16px);letter-spacing:.14em;color:var(--dim);
+  display:block;margin-top:3px}
+
+/* ===== experience reads as prose, not a list ===== */
+.exp-lead{max-width:52ch;color:var(--dim);font-size:16.5px;margin-bottom:clamp(34px,5vh,58px)}
+.exp-lead b{font-weight:400;color:var(--ink)}
+.job p{font-size:16.2px;line-height:1.72;color:var(--dim);max-width:60ch;
+  opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.job.in p{opacity:1;transform:none}
+.job p b{color:var(--ink);font-weight:400}
+.job p+p{margin-top:16px}
+
+
+/* ============ projects: an index ============ */
+.work-list{border-top:1px solid var(--edge)}
+.row{display:block;border-bottom:1px solid var(--edge);padding:clamp(26px,3.6vw,46px) 0;position:relative;
+  transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.row-top{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:16px}
+.row-cat{font-size:11.5px;letter-spacing:.13em;color:var(--dim);display:flex;gap:14px;align-items:baseline}
+.row-cat u{text-decoration:none;color:var(--amber);font-variant-numeric:tabular-nums}
+.row-yr{font-size:12px;color:var(--dim);letter-spacing:.06em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.row h3{font-size:clamp(30px,6.4vw,92px);font-weight:800;font-variation-settings:"wdth" 124;
+  line-height:.94;transition:color .45s var(--ease)}
+.row:hover h3{color:var(--amber)}
+.stackline{font-size:14.5px;color:var(--dim);margin-top:14px;max-width:64ch;line-height:1.6}
+.row-links{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.row-links a{font-size:12.5px;letter-spacing:.08em;color:var(--dim);border:1px solid var(--edge);
+  padding:8px 16px;border-radius:30px;transition:.35s}
+.row-links a:hover{color:var(--ink);border-color:var(--amber);background:rgba(255,176,58,.10)}
+
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .msk>span{transform:none}
   .fu{opacity:1;transform:none}
-  .job li{opacity:1;transform:none}
-  .exp-body{transform:none}
+  .job p{opacity:1}
+  .row h3,.row-cat,.row-yr,.row .stackline,.job .co,.job h3,.job time,.job p{transform:none}
   body.gl-on .hero h1{position:static;width:auto;height:auto;clip:auto}
-  .stage{position:relative;height:auto;overflow:visible;display:block}
-  .stage-outer{height:auto!important}
-  .stage-body{display:block}
-  .pc{position:relative;inset:auto;opacity:1!important;transform:none!important;pointer-events:auto;margin-bottom:70px}
-  .pc h3 .ch{transform:none!important;opacity:1!important}
-  .stage-rail{display:none}
   .grab-hint::before{animation:none}
   .hero{cursor:auto}
 }
@@ -279,7 +259,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 <div id="form"><i></i><span id="formName">TITLE</span></div>
 
 <div class="topbar">
-  <div><span><b>Abdulwadud Bakare</b></span><span>Systems Engineer</span></div>
+  <div class="tb-id"><span class="tb-name">Abdulwadud Bakare</span><span class="tb-role">Systems Engineer</span></div>
   <div class="r">
     <span><b id="clock">--:--:--</b>, Nagoya</span>
     <span class="tb-btns">
@@ -293,8 +273,9 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 <div class="page" id="page">
 
 <header class="hero">
-  <div class="hero-top">Currently<b>FundastA — aviation information systems, with JAXA</b></div>
-  <h1><span>SYSTEMS</span><span class="thin">ENGINEER</span></h1>
+  <div class="hero-top">Currently<b>FundastA — aviation systems for a major Japanese aerospace client</b></div>
+  <h1><span>Abdulwadud Bakare</span><span class="thin">Systems Engineer</span></h1>
+  <div class="hero-role" id="heroRole">Systems&nbsp;Engineer</div>
   <div class="hero-foot">
     <p id="heroP">Five years building software that has to hold: <em>distributed backends, mission-critical aviation platforms, and mobile products that ship to real users.</em> Based in Nagoya, Japan.</p>
     <div class="hero-right">
@@ -308,13 +289,13 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
   <div class="tag"><s></s> About</div>
   <h2 class="msk"><span><span class="muted">Five years of</span> Java, Spring Boot and Flutter,</span></h2>
   <h2 class="msk"><span class="muted">spent on systems where failure is expensive</span></h2>
-  <h2 class="msk"><span class="muted">— airspace and disaster information, banking</span></h2>
+  <h2 class="msk"><span class="muted">— aviation information systems, banking</span></h2>
   <h2 class="msk"><span class="muted">authentication, real-time video pipelines.</span></h2>
 
   <button id="moreBtn" data-cur="Expand" aria-expanded="false" aria-controls="moreBody">Read more</button>
   <div class="more" id="moreBody">
     <div>
-      <p>I work at the point where a specification becomes a running system. At FundastA that means taking Japanese interface-control documents and turning them into message schemas, validation rules and integration services for an aviation information-management platform built with JAXA — disaster information, restricted airspace, aircraft targeting, mission assignment, delivery-status tracking.</p>
+      <p>I work at the point where a specification becomes a running system. At FundastA that means taking Japanese interface-control documents and turning them into message schemas, validation rules and integration services for an aviation information-management platform built for a major Japanese aerospace client.</p>
       <p>Before Japan I spent five years shipping mobile and backend products across fintech, media and education: liveness detection and OTP flows for a microfinance bank, a video-processing pipeline that survives bad networks, an ATM-monitoring platform, a learning system for schools. Different domains, same job — make the thing reliable, then make it explain itself when it isn't.</p>
       <p>I like the unglamorous parts: integration testing, transmission state, why the queue drained but the client never updated. I'm most useful on a team that owns something people depend on.</p>
     </div>
@@ -322,187 +303,142 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 
   <dl class="facts fu">
     <div><dt>Based in</dt><dd>Nagoya, Aichi, Japan</dd></div>
-    <div><dt>Currently</dt><dd>Systems Engineer at FundastA, on an aviation information-management platform built with JAXA</dd></div>
+    <div><dt>Currently</dt><dd>Systems Engineer at FundastA, contributing to aviation systems for a major Japanese aerospace client</dd></div>
     <div><dt>Languages</dt><dd>English — native / fluent<br>Japanese — beginner</dd></div>
     <div><dt>Education</dt><dd>Advanced Diploma in Software Engineering, Aptech Computer Education, 2018–2021</dd></div>
   </dl>
 </section>
 
-<section id="work">
-  <div class="stage-outer" id="stageOuter">
-    <div class="stage">
-      <div class="stage-head">
-        <div class="tag" style="margin:0"><s></s> Selected projects</div>
-        <div class="stage-count"><span id="stageIdx">01</span><s id="stageTot">/ 08</s></div>
+<section id="work" data-rv>
+  <div class="tag"><s></s> Selected projects</div>
+  <div class="work-list">
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>SG 01</u> SaaS / E-signature and contract management</div>
+          <div class="row-yr">2026</div>
+        </div>
+        <h3>FUNDASIGN</h3>
+        <div class="stackline">Contract drafting, signing and tracking for the Japanese market. AI-assisted drafts, drag-and-drop signature fields, audit trails and tamper-evident PDFs. Built at FundastA.</div>
+        <div class="row-links"><a href="https://main.dik7on7j0fdhy.amplifyapp.com/" target="_blank" rel="noopener" data-cur="Open">Live site</a></div>
       </div>
 
-      <div class="stage-body" id="stageBody">
-
-        <article class="pc" data-yr="2024 — 2026">
+      <div class="row fu">
+        <div class="row-top">
           <div class="row-cat"><u>SV 01</u> Social video / Native media engineering</div>
-          <h3>Pingtop</h3>
-          <div class="stackline">Cross-platform social video application. Flutter, Swift, Objective-C, C++, FFmpeg, AVFoundation.</div>
-          <div class="row-links"><a href="https://apps.apple.com/gb/app/tezda/id6470659417" target="_blank" rel="noopener" data-cur="Open">App Store</a></div>
-        </article>
-
-        <article class="pc" data-yr="2023 — 2024">
-          <div class="row-cat"><u>FT 01</u> Fintech / Authentication and security</div>
-          <h3>Cashmatrix</h3>
-          <div class="stackline">Secure digital banking: authentication, savings, transfers, beneficiary management and transaction history. Java, PHP, TypeScript, Flutter, SwiftUI.</div>
-          <div class="row-links">
-            <a href="https://apps.apple.com/ng/app/cashmatrix/id6470770885?platform=iphone" target="_blank" rel="noopener" data-cur="Open">App Store</a>
-            <a href="https://play.google.com/store/apps/details?id=com.assetcashmatrix.mfb&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Play Store</a>
-          </div>
-        </article>
-
-        <article class="pc" data-yr="2022 — 2023">
-          <div class="row-cat"><u>NP 01</u> Non-profit / Donation processing</div>
-          <h3>Givegle</h3>
-          <div class="stackline">Donation platform. Flutter, Firebase, Cloud Firestore, Google Cloud Functions.</div>
-          <div class="row-links">
-            <a href="https://apps.apple.com/us/app/givegle/id6444736439" target="_blank" rel="noopener" data-cur="Open">App Store</a>
-            <a href="https://play.google.com/store/apps/details?id=com.lyticaltechnology.givegle" target="_blank" rel="noopener" data-cur="Open">Play Store</a>
-          </div>
-        </article>
-
-        <article class="pc" data-yr="2022 — 2023">
-          <div class="row-cat"><u>PR 01</u> Property / Estate management</div>
-          <h3>Silverstone</h3>
-          <div class="stackline">Property management, visitor workflows and documentation. Java, Spring Boot, Flutter, C++.</div>
-          <div class="row-links">
-            <a href="https://apps.apple.com/us/app/silverstone-managers/id1660094677" target="_blank" rel="noopener" data-cur="Open">App Store</a>
-            <a href="https://play.google.com/store/apps/details?id=com.pennyworth.middlechase" target="_blank" rel="noopener" data-cur="Open">Play Store</a>
-          </div>
-        </article>
-
-        <article class="pc" data-yr="2021 — 2022">
-          <div class="row-cat"><u>ED 01</u> Education / Learning management</div>
-          <h3>Tangerine</h3>
-          <div class="stackline">Course delivery, learner progress tracking and educator communication. Python, Java, Flutter.</div>
-          <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.zercomsystems.tangerinelms" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
-        </article>
-
-        <article class="pc" data-yr="2019 — 2021">
-          <div class="row-cat"><u>SC 01</u> Social / Anonymous consultation</div>
-          <h3>Off My Chest</h3>
-          <div class="stackline">Anonymous social platform with secure access to professional consultation. Flutter, Python, Java, Spring Boot, Firebase.</div>
-          <div class="row-links">
-            <a href="https://apps.apple.com/us/app/off-my-chest/id1532639828" target="_blank" rel="noopener" data-cur="Open">App Store</a>
-            <a href="https://play.google.com/store/apps/details?id=com.omc.offmychest" target="_blank" rel="noopener" data-cur="Open">Play Store</a>
-          </div>
-        </article>
-
-        <article class="pc" data-yr="2022">
-          <div class="row-cat"><u>LG 01</u> Logistics / Rider dispatch</div>
-          <h3>FoodHutz</h3>
-          <div class="stackline">Rider dispatch and delivery tracking. Flutter, Java.</div>
-          <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.foodhutz.riders&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Rider app</a></div>
-        </article>
-
-        <article class="pc" data-yr="2022">
-          <div class="row-cat"><u>FO 01</u> Field operations / Project management</div>
-          <h3>Xero Projects</h3>
-          <div class="stackline">Project tracking for field teams. Python, Django, Flutter.</div>
-          <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.xero.projects&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
-        </article>
-
+          <div class="row-yr">2024 — 2026</div>
+        </div>
+        <h3>Pingtop</h3>
+        <div class="stackline">Cross-platform social video application. Flutter, Swift, Objective-C, C++, FFmpeg, AVFoundation.</div>
+        <div class="row-links"><a href="https://apps.apple.com/gb/app/tezda/id6470659417" target="_blank" rel="noopener" data-cur="Open">App Store</a></div>
       </div>
 
-      <div class="stage-rail" id="stageRail"></div>
-    </div>
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>FT 01</u> Fintech / Authentication and security</div>
+          <div class="row-yr">2023 — 2024</div>
+        </div>
+        <h3>Cashmatrix</h3>
+        <div class="stackline">Secure digital banking: authentication, savings, transfers, beneficiary management and transaction history. Java, PHP, TypeScript, Flutter, SwiftUI.</div>
+        <div class="row-links"><a href="https://apps.apple.com/ng/app/cashmatrix/id6470770885?platform=iphone" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.assetcashmatrix.mfb&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+      </div>
+
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>NP 01</u> Non-profit / Donation processing</div>
+          <div class="row-yr">2022 — 2023</div>
+        </div>
+        <h3>Givegle</h3>
+        <div class="stackline">Donation platform. Flutter, Firebase, Cloud Firestore, Google Cloud Functions.</div>
+        <div class="row-links"><a href="https://apps.apple.com/us/app/givegle/id6444736439" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.lyticaltechnology.givegle" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+      </div>
+
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>PR 01</u> Property / Estate management</div>
+          <div class="row-yr">2022 — 2023</div>
+        </div>
+        <h3>Silverstone Managers</h3>
+        <div class="stackline">Property management, visitor workflows and documentation. Java, Spring Boot, Flutter, C++.</div>
+        <div class="row-links"><a href="https://apps.apple.com/us/app/silverstone-managers/id1660094677" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.pennyworth.middlechase" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+      </div>
+
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>ED 01</u> Education / Learning management</div>
+          <div class="row-yr">2021 — 2022</div>
+        </div>
+        <h3>Tangerine LMS</h3>
+        <div class="stackline">Course delivery, learner progress tracking and educator communication. Python, Java, Flutter.</div>
+        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.zercomsystems.tangerinelms" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+      </div>
+
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>SC 01</u> Social / Anonymous consultation</div>
+          <div class="row-yr">2019 — 2021</div>
+        </div>
+        <h3>Off My Chest</h3>
+        <div class="stackline">Anonymous social platform with secure access to professional consultation. Flutter, Python, Java, Spring Boot, Firebase.</div>
+        <div class="row-links"><a href="https://apps.apple.com/us/app/off-my-chest/id1532639828" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.omc.offmychest" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+      </div>
+
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>LG 01</u> Logistics / Rider dispatch</div>
+          <div class="row-yr">2022</div>
+        </div>
+        <h3>FoodHutz</h3>
+        <div class="stackline">Rider dispatch and delivery tracking. Flutter, Java.</div>
+        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.foodhutz.riders&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Rider app</a></div>
+      </div>
+
+      <div class="row fu">
+        <div class="row-top">
+          <div class="row-cat"><u>FO 01</u> Field operations / Project management</div>
+          <div class="row-yr">2022</div>
+        </div>
+        <h3>Xero Projects</h3>
+        <div class="stackline">Project tracking for field teams. Python, Django, Flutter.</div>
+        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.xero.projects&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+      </div>
   </div>
 </section>
 
 <section id="experience" data-rv>
   <div class="tag"><s></s> Experience</div>
-  <div class="exp-grid">
-    <div class="exp-rail" aria-hidden="true">
-      <div class="exp-now">
-        <div class="exp-count"><b id="expIdx">01</b><s>/ 06</s></div>
-        <div class="exp-co"><span id="expCo">FundastA</span></div>
-        <div class="exp-role" id="expRole">Systems Engineer</div>
-        <div class="exp-time" id="expTime">May 2026 — Present</div>
-      </div>
-    </div>
-    <div class="exp-body">
+  <p class="exp-lead fu"><b>Lagos, then London, now Nagoya.</b> Six roles, read from the present backwards. The through-line is the same one every time: own the thing end to end, and make it explain itself when it breaks.</p>
+  <div class="exp-list">
 
       <div class="job fu" data-time="May 2026 — Present" data-role="Systems Engineer">
         <div class="job-head"><time>May 2026 — Present</time><h3>Systems Engineer</h3><div class="co">FundastA <s>— Nagoya, Japan</s></div></div>
-        <ul>
-          <li>Engineer backend and integration components for a <b>mission-critical aviation information-management platform</b> delivered with <b>JAXA</b> and external aviation stakeholders.</li>
-          <li>Design Java and Spring Boot services for disaster-information processing, restricted-airspace distribution, aircraft targeting, mission assignment and delivery-status tracking.</li>
-          <li>Build asynchronous communication workflows with <b>RabbitMQ and WebSockets</b>, moving operational information reliably between web applications, backend services, communication components and aircraft-facing systems.</li>
-          <li>Design REST APIs and persistence workflows with <b>Spring MVC, MyBatis and PostgreSQL</b>, including caching, transmission-state management and external-system synchronisation.</li>
-          <li>Convert Japanese interface-control documents and stakeholder requirements into production-ready message schemas, validation rules, integration services and frontend functionality.</li>
-          <li>Diagnose distributed-system failures involving authentication, HTTP routing, message queues, database state, WebSocket payloads and browser clients.</li>
-          <li>Own features across requirements analysis, system design, implementation, integration testing, documentation, stakeholder review and Git-based delivery.</li>
-        </ul>
+        <p>FundastA builds an aviation information-management platform for a <b>major Japanese aerospace client</b>. I work on the backend and on the seams between systems — the services that move operational information between web applications, backend components and aircraft-facing systems, and the message contracts that keep them all honest. A good part of the job is translation: Japanese interface-control documents in one hand, production services in the other. The rest is diagnosis, because in a distributed system the interesting failure is never where the error appears.</p>
       </div>
 
       <div class="job fu" data-time="Sep 2024 — 2026" data-role="Senior Software Engineer">
         <div class="job-head"><time>Sep 2024 — 2026</time><h3>Senior Software Engineer</h3><div class="co">Pingtop <s>— London, UK (remote)</s></div></div>
-        <ul>
-          <li>Led the architecture and development of advanced video-editing capabilities: overlays, voice-over recording, music integration, compression and media manipulation across mobile platforms.</li>
-          <li>Architected a resilient video-processing and upload pipeline using retries, background compilation, queue management and recoverable upload states, to hold up under unstable networks.</li>
-          <li>Implemented real-time media processing with <b>FFmpeg, AVFoundation, Objective-C, Swift, C++ and Flutter</b>, balancing output quality against device performance, memory and server load.</li>
-          <li>Built native platform integrations and used <b>Dart isolates</b> to run resource-intensive editing and upload work without blocking the interface.</li>
-          <li>Collaborated across product, design, backend and mobile teams on location, content-visibility, publishing and video-detail workflows, from specification through release.</li>
-        </ul>
+        <p>A social video app, which meant living inside the media pipeline. I led the editing capabilities — overlays, voice-over, music, compression — and rebuilt the upload path so it survives a bad connection: retries, background compilation, recoverable state. Real-time processing in <b>FFmpeg and AVFoundation</b> is a permanent negotiation between output quality, device heat and server cost. Dart isolates and native bridges kept the interface responsive while all of that ran underneath it.</p>
       </div>
 
       <div class="job fu" data-time="Aug 2023 — Sep 2024" data-role="Software Engineer">
         <div class="job-head"><time>Aug 2023 — Sep 2024</time><h3>Software Engineer</h3><div class="co">Asset Matrix Microfinance Bank <s>— Ikeja, Lagos, Nigeria</s></div></div>
-        <ul>
-          <li>Built security-sensitive fintech features including liveness detection, facial recognition, OTP, fingerprint and location-based authentication.</li>
-          <li>Developed the Matrix Saves feature and saved-beneficiary workflows for recurring deposits and faster repeat transactions.</li>
-          <li>Improved transaction-history performance through pagination, state-management optimisation and resilient API integration.</li>
-          <li>Integrated secure payment and financial-service APIs across mobile and backend components.</li>
-          <li>Worked with backend, security and product teams on payment flows, incident response, releases and production support.</li>
-        </ul>
+        <p>Banking, where the stakes are other people's money. I built the authentication surface — liveness detection, facial recognition, OTP, fingerprint — and the savings and beneficiary flows people actually touch every day. Two habits came out of it: treat every integration as hostile until it proves otherwise, and sit in the incident call rather than read the write-up afterwards.</p>
       </div>
 
       <div class="job fu" data-time="Jul 2022 — Aug 2023" data-role="Software Engineer">
         <div class="job-head"><time>Jul 2022 — Aug 2023</time><h3>Software Engineer</h3><div class="co">Lytical Technology <s>— Lekki, Lagos, Nigeria</s></div></div>
-        <ul>
-          <li>Developed donation and estate-management products with <b>Flutter, Java Spring Boot, Firebase and REST APIs</b>.</li>
-          <li>Engineered backend services and database integrations for property management, visitor workflows, documentation, payments and real-time analytics.</li>
-          <li>Implemented secure payment-processing and data-protection controls aligned with fintech and <b>PCI DSS</b> requirements.</li>
-          <li>Delivered applications across the full lifecycle: requirements analysis, implementation, testing, deployment and production maintenance.</li>
-        </ul>
+        <p>Two products, donation and estate management, built end to end in <b>Flutter and Spring Boot</b>. This is where I stopped being handed specifications and started writing them — requirements, implementation, testing, deployment, and the long tail of production maintenance that eventually tells you what you got wrong.</p>
       </div>
 
       <div class="job fu" data-time="Apr 2021 — Jun 2022" data-role="Software Engineer">
         <div class="job-head"><time>Apr 2021 — Jun 2022</time><h3>Software Engineer</h3><div class="co">Zercom Systems <s>— Victoria Island, Lagos, Nigeria</s></div></div>
-        <ul>
-          <li>Built and maintained an education platform supporting course delivery, learner progress tracking and educator–student communication.</li>
-          <li>Maintained an ATM-monitoring platform, improving observability, incident diagnosis, security controls and operational reliability.</li>
-          <li>Developed responsive application interfaces and integrated frontend applications with backend services and databases.</li>
-          <li>Supported system troubleshooting, application maintenance, testing and production releases.</li>
-        </ul>
+        <p>An education platform and an ATM-monitoring system, which sounds like two jobs and turned out to be the same problem twice. Both were things people quietly depended on, and both taught me that observability isn't a feature you bolt on once something has already gone wrong.</p>
       </div>
 
       <div class="job fu" data-time="Feb 2019 — Jan 2021" data-role="Intern">
         <div class="job-head"><time>Feb 2019 — Jan 2021</time><h3>Intern</h3><div class="co">Off My Chest <s>— Ikate, Lagos, Nigeria</s></div></div>
-        <ul>
-          <li>Contributed across the development lifecycle of an anonymous social platform using Java, Spring Boot, Flutter and Firebase.</li>
-          <li>Developed mobile and backend functionality enabling users to share personal experiences and access professional consultations securely.</li>
-          <li>Assisted with API integration, application testing, debugging and production releases.</li>
-        </ul>
+        <p>My first engineering job, on an anonymous platform where people shared things they couldn't say out loud and reached professional help. Java, Spring Boot, Flutter, Firebase. Two years of shipping small pieces of something that genuinely mattered to the people using it, which set the bar for everything after.</p>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<section id="skills" data-rv>
-  <div class="tag"><s></s> Toolkit</div>
-  <div class="tk">
-    <div class="tk-row fu" data-dir="1"><div class="tk-label">Backend</div><div class="tk-view"><div class="tk-track"><i><em>Java</em><b></b><em>Spring Boot</em><b></b><em>Spring MVC</em><b></b><em>REST APIs</em><b></b><em>WebSockets</em><b></b><em>MyBatis</em><b></b></i><i><em>Java</em><b></b><em>Spring Boot</em><b></b><em>Spring MVC</em><b></b><em>REST APIs</em><b></b><em>WebSockets</em><b></b><em>MyBatis</em><b></b></i></div></div></div>
-    <div class="tk-row fu" data-dir="-1"><div class="tk-label">Distributed systems</div><div class="tk-view"><div class="tk-track"><i><em>RabbitMQ</em><b></b><em>Asynchronous messaging</em><b></b><em>Caching</em><b></b><em>Real-time data flows</em><b></b></i><i><em>RabbitMQ</em><b></b><em>Asynchronous messaging</em><b></b><em>Caching</em><b></b><em>Real-time data flows</em><b></b></i></div></div></div>
-    <div class="tk-row fu" data-dir="1"><div class="tk-label">Databases</div><div class="tk-view"><div class="tk-track"><i><em>PostgreSQL</em><b></b><em>SQL</em><b></b><em>Firebase</em><b></b><em>Cloud Firestore</em><b></b><em>Supabase</em><b></b></i><i><em>PostgreSQL</em><b></b><em>SQL</em><b></b><em>Firebase</em><b></b><em>Cloud Firestore</em><b></b><em>Supabase</em><b></b></i></div></div></div>
-    <div class="tk-row fu" data-dir="-1"><div class="tk-label">Mobile &amp; native</div><div class="tk-view"><div class="tk-track"><i><em>Flutter</em><b></b><em>Dart</em><b></b><em>Swift</em><b></b><em>Objective-C</em><b></b><em>C++</em><b></b><em>FFmpeg</em><b></b><em>AVFoundation</em><b></b></i><i><em>Flutter</em><b></b><em>Dart</em><b></b><em>Swift</em><b></b><em>Objective-C</em><b></b><em>C++</em><b></b><em>FFmpeg</em><b></b><em>AVFoundation</em><b></b></i></div></div></div>
-    <div class="tk-row fu" data-dir="1"><div class="tk-label">Frontend</div><div class="tk-view"><div class="tk-track"><i><em>JavaScript</em><b></b><em>jQuery</em><b></b><em>JSP</em><b></b><em>HTML</em><b></b><em>CSS</em><b></b></i><i><em>JavaScript</em><b></b><em>jQuery</em><b></b><em>JSP</em><b></b><em>HTML</em><b></b><em>CSS</em><b></b></i></div></div></div>
-    <div class="tk-row fu" data-dir="-1"><div class="tk-label">Infrastructure</div><div class="tk-view"><div class="tk-track"><i><em>Docker</em><b></b><em>AWS</em><b></b><em>Git</em><b></b><em>Linux</em><b></b><em>API testing</em><b></b><em>Debugging</em><b></b></i><i><em>Docker</em><b></b><em>AWS</em><b></b><em>Git</em><b></b><em>Linux</em><b></b><em>API testing</em><b></b><em>Debugging</em><b></b></i></div></div></div>
   </div>
 </section>
 
@@ -577,63 +513,24 @@ let LANG = 'en';
    links and the scrollbar working normally.
 ========================================================== */
 const Scroll = (() => {
-  const ON = !RM && !TOUCH;
-  let target = window.scrollY, current = target, self = false;
+  // Native scroll. The browser owns the scrollbar; this only reports
+  // position and per-frame velocity once per animation frame, so every
+  // module still has one place to read from.
+  let prev = window.scrollY;
   const subs = [];
   const max = () => Math.max(0, document.documentElement.scrollHeight - innerHeight);
 
-  function to(y, instant){
-    target = clamp(y, 0, max());
-    if(instant || !ON){ current = target; window.scrollTo(0, current); }
-  }
-
-  if(ON){
-    addEventListener('wheel', e => {
-      if(e.ctrlKey) return;
-      e.preventDefault();
-      target = clamp(target + e.deltaY * (e.deltaMode === 1 ? 24 : 1), 0, max());
-    }, {passive:false});
-
-    addEventListener('keydown', e => {
-      if(/input|textarea/i.test(e.target.tagName)) return;
-      const step = innerHeight * .82;
-      const map = {ArrowDown:120, ArrowUp:-120, PageDown:step, PageUp:-step,
-                   Home:-1e9, End:1e9, ' ':step};
-      if(!(e.key in map)) return;
-      e.preventDefault();
-      target = clamp(target + map[e.key], 0, max());
-    });
-
-    addEventListener('scroll', () => {
-      if(self){ self = false; return; }
-      target = current = window.scrollY;      // scrollbar drag, find-in-page, etc.
-    }, {passive:true});
+  function to(y){
+    window.scrollTo({top: clamp(y, 0, max()), behavior: RM ? 'auto' : 'smooth'});
   }
 
   (function frame(){
     requestAnimationFrame(frame);
-    if(ON){
-      const next = lerp(current, target, .085);
-      if(Math.abs(next - current) > .04){
-        current = next;
-        self = true;
-        window.scrollTo(0, current);
-      } else current = target;
-    } else {
-      current = target = window.scrollY;
-    }
-    const vel = target - current;
-    for(const fn of subs) fn(current, vel);
+    const y = window.scrollY;
+    const vel = y - prev;
+    prev = y;
+    for(const fn of subs) fn(y, vel);
   })();
-
-  addEventListener('click', e => {
-    const a = e.target.closest('a[href^="#"]');
-    if(!a) return;
-    const el = document.querySelector(a.getAttribute('href'));
-    if(!el) return;
-    e.preventDefault();
-    to(window.scrollY + el.getBoundingClientRect().top);
-  });
 
   return {on: fn => subs.push(fn), to, max};
 })();
@@ -657,10 +554,19 @@ function titlePoints(count){
   x.fillStyle = '#fff';
   x.textAlign = 'center';
   x.textBaseline = 'middle';
-  x.font = '800 210px Anybody, sans-serif';
-  x.fillText('SYSTEMS', W/2, 165);
-  x.font = '300 205px Anybody, sans-serif';
-  x.fillText('ENGINEER', W/2, 400);
+  // fit each line to the canvas instead of trusting a fixed size —
+  // "ABDULWADUD" is a lot wider than "SYSTEMS"
+  function line(text, weight, y){
+    let size = 230;
+    do {
+      x.font = `${weight} ${size}px Anybody, sans-serif`;
+      if(x.measureText(text).width <= W * .92) break;
+      size -= 6;
+    } while(size > 60);
+    x.fillText(text, W/2, y);
+  }
+  line('ABDULWADUD', 800, 170);
+  line('BAKARE', 300, 400);
 
   const d = x.getImageData(0, 0, W, H).data;
   const hits = [];
@@ -846,6 +752,182 @@ async function initGL(){
   scene.add(pts);
   document.body.classList.add('gl-on');
 
+
+  /* ==========================================================
+     BACKGROUND 1 — NEBULA
+     A full-screen domain-warped fbm cloud behind everything.
+     Folds through itself rather than sliding, brightens with
+     scroll energy, opens up toward the pointer.
+  ========================================================== */
+  const nebScene = new THREE.Scene();
+  const nebCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const nebUni = {
+    uTime:{value:0}, uAspect:{value:1}, uPointer:{value:new THREE.Vector2(0,0)},
+    uEnergy:{value:0}, uIntro:{value:0},
+    uA:{value:new THREE.Color('#D2451E')}, uB:{value:new THREE.Color('#FFB03A')}
+  };
+  const neb = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+    uniforms: nebUni, transparent: true, depthWrite: false, depthTest: false,
+    vertexShader: `
+      varying vec2 vUv;
+      void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }`,
+    fragmentShader: `
+      precision highp float;
+      uniform float uTime, uAspect, uEnergy, uIntro;
+      uniform vec2 uPointer; uniform vec3 uA, uB;
+      varying vec2 vUv;
+      vec2 hash(vec2 p){
+        p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+        return -1. + 2. * fract(sin(p) * 43758.5453123);
+      }
+      float noise(vec2 p){
+        vec2 i = floor(p), f = fract(p);
+        vec2 u = f * f * (3. - 2. * f);
+        return mix(mix(dot(hash(i), f),
+                       dot(hash(i + vec2(1,0)), f - vec2(1,0)), u.x),
+                   mix(dot(hash(i + vec2(0,1)), f - vec2(0,1)),
+                       dot(hash(i + vec2(1,1)), f - vec2(1,1)), u.x), u.y);
+      }
+      float fbm(vec2 p){
+        float v = 0., a = .5;
+        for(int i = 0; i < 5; i++){ v += a * noise(p); p *= 2.03; a *= .5; }
+        return v;
+      }
+      void main(){
+        vec2 uv = (vUv - .5) * vec2(uAspect, 1.);
+        float t = uTime * .022;
+        vec2 q = vec2(fbm(uv * 1.5 + t), fbm(uv * 1.5 + vec2(5.2, 1.3) - t));
+        vec2 r = vec2(fbm(uv * 1.5 + 3.4 * q + vec2(1.7, 9.2) + t * 1.4),
+                      fbm(uv * 1.5 + 3.4 * q + vec2(8.3, 2.8) - t * 1.1));
+        float f = fbm(uv * 1.5 + 3.2 * r);
+        float v = pow(smoothstep(-.15, .75, f), 1.9);
+        float d = length(uv - uPointer * vec2(uAspect, 1.) * .5);
+        v += smoothstep(.85, 0., d) * .13;
+        v *= .28 + uEnergy * .55;
+        vec3 col = mix(uA, uB, clamp(f * 1.4 + .25, 0., 1.));
+        float vig = smoothstep(1.25, .12, length(uv));
+        gl_FragColor = vec4(col, clamp(v * vig * uIntro, 0., 1.));
+      }`
+  }));
+  neb.frustumCulled = false;
+  nebScene.add(neb);
+
+  /* ==========================================================
+     BACKGROUND 2 — DEEP FIELD
+     Far stars on a slow counter-rotation, each twinkling on its
+     own clock, so the title has depth to sit in front of.
+  ========================================================== */
+  const DEEP = innerWidth < 760 ? 1400 : 3600;
+  const dPos = new Float32Array(DEEP * 3), dSeed = new Float32Array(DEEP);
+  for(let i = 0; i < DEEP; i++){
+    const rr2 = 9 + Math.random() * 12;
+    const th2 = Math.random() * Math.PI * 2;
+    const ph2 = Math.acos(2 * Math.random() - 1);
+    dPos[i*3]   = rr2 * Math.sin(ph2) * Math.cos(th2);
+    dPos[i*3+1] = rr2 * Math.sin(ph2) * Math.sin(th2) * .6;
+    dPos[i*3+2] = rr2 * Math.cos(ph2) - 6;
+    dSeed[i] = Math.random();
+  }
+  const dGeo = new THREE.BufferGeometry();
+  dGeo.setAttribute('position', new THREE.BufferAttribute(dPos, 3));
+  dGeo.setAttribute('aSeed', new THREE.BufferAttribute(dSeed, 1));
+  const dUni = {uTime:{value:0}, uPR:{value:1}, uIntro:{value:0}};
+  const deep = new THREE.Points(dGeo, new THREE.ShaderMaterial({
+    uniforms: dUni, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      attribute float aSeed; uniform float uPR; varying float vT;
+      void main(){
+        vT = aSeed;
+        vec4 mv = modelViewMatrix * vec4(position, 1.);
+        gl_PointSize = (1.0 + aSeed * 2.2) * uPR * (14.0 / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      uniform float uTime, uIntro; varying float vT;
+      void main(){
+        vec2 c = gl_PointCoord - .5;
+        float r = length(c);
+        if(r > .5) discard;
+        float tw = .55 + .45 * sin(uTime * (.5 + vT * 1.6) + vT * 40.);
+        float a = smoothstep(.5, .0, r) * (.16 + vT * .34) * tw * uIntro;
+        gl_FragColor = vec4(mix(vec3(1., .84, .62), vec3(1.), vT), a);
+      }`
+  }));
+  deep.frustumCulled = false;
+  scene.add(deep);
+
+  /* ==========================================================
+     BACKGROUND 3 — COMETS
+     Six streaks, each a tail of points whose positions are the
+     head's recent history. They launch off-screen left, cross,
+     and relaunch on a random delay.
+  ========================================================== */
+  const CN = 6, TAIL = 16, CT = CN * TAIL;
+  const cPos = new Float32Array(CT * 3), cAlpha = new Float32Array(CT);
+  const comets = [];
+  function launchComet(i, first){
+    comets[i] = {
+      x: -7 - Math.random() * 5,
+      y: 3.2 - Math.random() * 6.4,
+      z: -2 - Math.random() * 3,
+      vx: .052 + Math.random() * .055,
+      vy: -.012 - Math.random() * .022,
+      wait: first ? Math.random() * 900 : 260 + Math.random() * 1100,
+      hist: []
+    };
+  }
+  for(let i = 0; i < CN; i++) launchComet(i, true);
+
+  const cGeo = new THREE.BufferGeometry();
+  cGeo.setAttribute('position', new THREE.BufferAttribute(cPos, 3));
+  cGeo.setAttribute('aA', new THREE.BufferAttribute(cAlpha, 1));
+  const cUni = {uPR:{value:1}, uIntro:{value:0}};
+  const cometPts = new THREE.Points(cGeo, new THREE.ShaderMaterial({
+    uniforms: cUni, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      attribute float aA; uniform float uPR; varying float vA;
+      void main(){
+        vA = aA;
+        vec4 mv = modelViewMatrix * vec4(position, 1.);
+        gl_PointSize = (2.0 + aA * 7.0) * uPR * (9.0 / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      uniform float uIntro; varying float vA;
+      void main(){
+        vec2 c = gl_PointCoord - .5;
+        float r = length(c);
+        if(r > .5) discard;
+        vec3 col = mix(vec3(1., .69, .23), vec3(1., .97, .90), vA * vA);
+        gl_FragColor = vec4(col, smoothstep(.5, .0, r) * vA * .9 * uIntro);
+      }`
+  }));
+  cometPts.frustumCulled = false;
+  scene.add(cometPts);
+
+  function stepComets(){
+    for(let i = 0; i < CN; i++){
+      const c = comets[i];
+      if(c.wait > 0){
+        c.wait -= 16;
+        for(let k = 0; k < TAIL; k++) cAlpha[i * TAIL + k] = 0;
+        continue;
+      }
+      c.x += c.vx; c.y += c.vy;
+      c.hist.unshift([c.x, c.y, c.z]);
+      if(c.hist.length > TAIL) c.hist.pop();
+      for(let k = 0; k < TAIL; k++){
+        const h = c.hist[Math.min(k, c.hist.length - 1)];
+        const j = (i * TAIL + k) * 3;
+        cPos[j] = h[0]; cPos[j+1] = h[1]; cPos[j+2] = h[2];
+        cAlpha[i * TAIL + k] = Math.pow(1 - k / TAIL, 2.2);
+      }
+      if(c.x > 8) launchComet(i, false);
+    }
+    cGeo.attributes.position.needsUpdate = true;
+    cGeo.attributes.aA.needsUpdate = true;
+  }
+
   let fitScale = 1;
   function resize(){
     renderer.setSize(innerWidth, innerHeight, false);
@@ -853,6 +935,7 @@ async function initGL(){
     cam.updateProjectionMatrix();
     const visW = 2 * cam.position.z * Math.tan((cam.fov * Math.PI/180)/2) * cam.aspect;
     fitScale = Math.min(1, (visW * .90) / 5.6);     // keep the words on screen
+    nebUni.uAspect.value = cam.aspect;
   }
   addEventListener('resize', resize);
   resize();
@@ -914,7 +997,7 @@ async function initGL(){
   }
 
   const anchors = [['.hero',0],['#about',1],['#work',2],['#experience',3],
-                   ['#skills',4],['#play',4],['#contact',5]]
+                   ['#play',4],['#contact',5]]
     .map(([sel,ph]) => ({el: document.querySelector(sel), ph}))
     .filter(a => a.el);
 
@@ -923,7 +1006,7 @@ async function initGL(){
     let idx = 0;
     anchors.forEach((a, i) => { if(a.el.getBoundingClientRect().top <= mid) idx = i; });
     phase = anchors[idx].ph;
-    energy = Math.max(energy, clamp(Math.abs(vel) / 220, 0, .8));
+    energy = Math.max(energy, clamp(Math.abs(vel) / 95, 0, .8));
     fade = 1 - clamp((y - innerHeight * .4) / (innerHeight * 1.1)) * .26;
 
     const nm = FORMATIONS[anchors[idx].ph] || FORMATIONS[0];
@@ -989,7 +1072,26 @@ async function initGL(){
     const sc = (1 + smPhase * .05 + churn * .10 + burst * .16) * lerp(fitScale, 1, crisp);
     pts.scale.set(sc, sc, sc);
 
-    renderer.render(scene, cam);
+    // --- background layers ---
+    nebUni.uTime.value = uni.uTime.value;
+    nebUni.uPointer.value.set(sm.x, sm.y);
+    nebUni.uEnergy.value = smEnergy + burst * .8;
+    nebUni.uIntro.value = intro;
+
+    dUni.uTime.value = uni.uTime.value;
+    dUni.uPR.value = uni.uPR.value;
+    dUni.uIntro.value = intro;
+    deep.rotation.y -= .00035 + smEnergy * .0016;
+    deep.rotation.x = sm.y * .05;
+
+    cUni.uPR.value = uni.uPR.value;
+    cUni.uIntro.value = intro;
+    if(!RM) stepComets();
+
+    renderer.autoClear = false;
+    renderer.clear();
+    renderer.render(nebScene, nebCam);   // cloud behind everything
+    renderer.render(scene, cam);         // stars, comets, then the title
   })();
 }
 
@@ -1035,6 +1137,13 @@ initGL().catch(err => {
     top.style.opacity = 0;
     top.style.transition = 'opacity .9s var(--ease) 1.1s';
     requestAnimationFrame(() => top.style.opacity = 1);
+    const role = document.getElementById('heroRole');
+    if(role){
+      role.style.opacity = 0;
+      role.style.transform = 'translateY(20px)';
+      role.style.transition = 'opacity 1s var(--ease) 1.25s, transform 1s var(--ease) 1.25s';
+      requestAnimationFrame(() => { role.style.opacity = 1; role.style.transform = 'none'; });
+    }
     ['heroP','heroCue'].forEach((id, i) => {
       const el = document.getElementById(id);
       el.style.transition = 'opacity .9s var(--ease), transform .9s var(--ease)';
@@ -1046,86 +1155,10 @@ initGL().catch(err => {
 })();
 
 /* ==========================================================
-   4. PINNED PROJECT STAGE
-   The section is tall, the frame is sticky. Scroll progress
-   scrubs which project holds the screen, and each title's
-   characters lag in and out individually.
-========================================================== */
-(function stage(){
-  const outer = document.getElementById('stageOuter'),
-        cards = [...document.querySelectorAll('.pc')],
-        rail  = document.getElementById('stageRail'),
-        idxEl = document.getElementById('stageIdx'),
-        totEl = document.getElementById('stageTot');
-  if(!outer || !cards.length) return;
-
-  totEl.textContent = '/ ' + String(cards.length).padStart(2, '0');
-  if(!RM) outer.style.height = (cards.length * 100 + 60) + 'svh';
-
-  cards.forEach((c, i) => {
-    const h = c.querySelector('h3');
-    const txt = h.textContent.trim();
-    h.dataset.final = txt;
-    h.innerHTML = [...txt].map(ch =>
-      `<span class="ch">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('');
-
-    const yr = document.createElement('div');
-    yr.className = 'stage-yr';
-    yr.textContent = c.dataset.yr || '';
-    c.querySelector('.row-cat').appendChild(yr);
-
-    const b = document.createElement('b');
-    b.title = txt;
-    b.addEventListener('click', () => {
-      const span = outer.offsetHeight - innerHeight;
-      Scroll.to(outer.offsetTop + (i + .5) * span / cards.length);
-      dispatchEvent(new CustomEvent('pulse3d', {detail:.5}));
-    });
-    rail.appendChild(b);
-  });
-  const bars = [...rail.children];
-  if(RM) return;
-
-  let last = -1;
-  Scroll.on(() => {
-    const r = outer.getBoundingClientRect();
-    const span = outer.offsetHeight - innerHeight;
-    const p = clamp(-r.top / (span || 1));
-    const pos = p * cards.length - .5;
-
-    cards.forEach((c, i) => {
-      const t = pos - i;
-      c.style.opacity = clamp(1 - Math.abs(t) * 1.25);
-      c.style.transform = `translate3d(0,${(t * -90).toFixed(1)}px,0)`;
-      c.classList.toggle('live', Math.abs(t) < .5);
-
-      c.querySelectorAll('.ch').forEach((ch, k) => {
-        const off = t * (30 + (k % 5) * 22);
-        const rot = t * (10 + (k % 3) * 7);
-        ch.style.transform = `translate3d(0,${off.toFixed(1)}px,0) rotate(${rot.toFixed(2)}deg)`;
-        ch.style.opacity = clamp(1 - Math.abs(t) * 1.6);
-      });
-
-      bars[i].style.setProperty('--f', clamp(1 - Math.abs(t)).toFixed(3));
-    });
-
-    const active = clamp(Math.round(pos), 0, cards.length - 1);
-    if(active !== last){
-      last = active;
-      idxEl.textContent = String(active + 1).padStart(2, '0');
-      dispatchEvent(new CustomEvent('pulse3d', {detail:.35}));
-    }
-  });
-})();
-
-/* ==========================================================
-   5. VELOCITY SKEW, PROGRESS, REVEALS
+   4. VELOCITY SKEW, PROGRESS, REVEALS
 ========================================================== */
 Scroll.on((y, vel) => {
   document.getElementById('bar').style.width = (y / (Scroll.max() || 1) * 100) + '%';
-  if(RM) return;
-  const sk = clamp(vel * .022, -3, 3).toFixed(3) + 'deg';
-  document.querySelectorAll('.exp-body').forEach(el => el.style.setProperty('--sk', sk));
 });
 
 const io = new IntersectionObserver(es => {
@@ -1142,10 +1175,53 @@ document.querySelectorAll('[data-rv]').forEach(el => io.observe(el));
 const io2 = new IntersectionObserver(es => {
   es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io2.unobserve(e.target); } });
 }, {threshold:.08, rootMargin:'0px 0px -4% 0px'});
-document.querySelectorAll('.job.fu, .tk-row.fu').forEach(el => io2.observe(el));
+document.querySelectorAll('.job.fu, .row.fu').forEach(el => io2.observe(el));
+
+/* ---- project titles: scrubbed horizontal travel, faster than the page ---- */
+(function(){
+  // number the chapters and lift the role line above the company name
+  const jobs = [...document.querySelectorAll('.job')];
+  jobs.forEach((j, i) => {
+    const head = j.querySelector('.job-head'),
+          h    = j.querySelector('h3'),
+          time = j.querySelector('time');
+    if(head && h && time && !head.querySelector('.job-top')){
+      const top = document.createElement('div');
+      top.className = 'job-top';
+      head.insertBefore(top, head.firstChild);
+      top.appendChild(h);
+      top.appendChild(time);
+    }
+    if(h && !h.querySelector('u')){
+      const u = document.createElement('u');
+      u.textContent = String(jobs.length - i).padStart(2, '0');
+      h.insertBefore(u, h.firstChild);
+    }
+  });
+
+  if(RM) return;
+  const rows = [...document.querySelectorAll('.row, .job')];
+  if(!rows.length) return;
+  Scroll.on(() => {
+    const h = innerHeight;
+    for(const row of rows){
+      const r = row.getBoundingClientRect();
+      if(r.bottom < -200 || r.top > h + 200) continue;
+      // -1 entering from the bottom, 0 mid-screen, +1 leaving the top
+      const p = ((h - r.top) / (h + r.height)) * 2 - 1;
+      const job = row.classList.contains('job');
+      const lead = job ? row.querySelector('.co') : row.querySelector('h3');
+      if(lead) lead.style.setProperty('--tx', (p * 78).toFixed(1) + 'px');
+      row.querySelectorAll('.row-cat, .row-yr, .job-top h3, time')
+         .forEach(el => el.style.setProperty('--tx2', (p * -34).toFixed(1) + 'px'));
+      const st = row.querySelector('.stackline') || row.querySelector('p');
+      if(st) st.style.setProperty('--tx3', (p * 26).toFixed(1) + 'px');
+    }
+  });
+})();
 
 /* ==========================================================
-   6. EXPERIENCE RAIL + SPINE
+   5. HORIZONTAL TRAVEL + CHAPTERS
 ========================================================== */
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&/<>*+-';
 function decode(el){
@@ -1162,105 +1238,33 @@ function decode(el){
   }, 28);
 }
 
-(function experience(){
-  const body = document.querySelector('.exp-body');
-  const jobs = [...document.querySelectorAll('.exp-body .job')];
-  if(!body || !jobs.length) return;
-
-  const spine = document.createElement('div');
-  spine.className = 'exp-spine';
-  spine.innerHTML = '<div class="exp-spine-fill"></div>';
-  spine.setAttribute('aria-hidden', 'true');
-  body.appendChild(spine);
-  const fill = spine.firstElementChild;
-
-  jobs.forEach(j => {
-    const n = document.createElement('div');
-    n.className = 'exp-node';
-    n.setAttribute('aria-hidden', 'true');
-    j.appendChild(n);
-    j.querySelectorAll('li').forEach((li, i) => li.style.transitionDelay = (.12 + i * .07) + 's');
-  });
-
-  const idxEl = document.getElementById('expIdx'),
-        coEl  = document.getElementById('expCo'),
-        roleEl= document.getElementById('expRole'),
-        timeEl= document.getElementById('expTime'),
-        tot   = document.querySelector('.exp-count s');
-  if(tot) tot.textContent = '/ ' + String(jobs.length).padStart(2, '0');
-
-  let current = -1;
-  Scroll.on(() => {
-    const r = body.getBoundingClientRect();
-    const mark = innerHeight * .42;
-    fill.style.setProperty('--fill', (clamp((mark - r.top) / r.height) * 100).toFixed(2) + '%');
-
-    let active = -1;
-    jobs.forEach((j, i) => { if(j.getBoundingClientRect().top <= mark) active = i; });
-    jobs.forEach((j, i) => j.classList.toggle('here', i === active));
-
-    if(active === current || active < 0) return;
-    current = active;
-    const j = jobs[active];
-    const co = j.querySelector('.co').cloneNode(true);
-    const sub = co.querySelector('s'); if(sub) sub.remove();
-    idxEl.textContent  = String(active + 1).padStart(2, '0');
-    roleEl.textContent = j.querySelector('h3').textContent.trim();
-    timeEl.textContent = j.querySelector('time').textContent.trim();
-    coEl.dataset.final = co.textContent.trim();
-    decode(coEl);
-    dispatchEvent(new CustomEvent('pulse3d', {detail:.4}));
-  });
-})();
-
 /* ==========================================================
-   7. MARQUEES
+   6. CONTACT MARQUEE
 ========================================================== */
 (function(){
-  const rows = [...document.querySelectorAll('.tk-row')].map(row => ({
-    el: row, track: row.querySelector('.tk-track'),
-    dir: +row.dataset.dir || 1, x: 0, half: 0, hover: false
-  }));
   const mq = document.getElementById('mq');
+  if(!mq) return;
   let mqx = 0, mqhalf = 0;
-
-  const measure = () => {
-    rows.forEach(r => { r.half = r.track.scrollWidth / 2; if(r.dir < 0 && r.x === 0) r.x = -r.half; });
-    if(mq) mqhalf = mq.scrollWidth / 2;
-  };
+  const measure = () => mqhalf = mq.scrollWidth / 2;
   addEventListener('resize', measure);
   addEventListener('load', measure);
   measure();
   setTimeout(measure, 900);
-
-  rows.forEach(r => {
-    r.el.addEventListener('pointerenter', () => r.hover = true);
-    r.el.addEventListener('pointerleave', () => r.hover = false);
-  });
 
   let vel = 0;
   Scroll.on((y, v) => { vel = v; });
 
   (function loop(){
     requestAnimationFrame(loop);
-    rows.forEach(r => {
-      if(!r.half) return;
-      const speed = (r.hover ? .12 : .55) + Math.abs(vel) * .012;
-      r.x -= r.dir * speed + vel * .014 * r.dir;
-      if(r.x <= -r.half) r.x += r.half;
-      if(r.x > 0) r.x -= r.half;
-      r.track.style.transform = `translate3d(${r.x}px,0,0)`;
-    });
-    if(mq && mqhalf){
-      mqx -= .9 + Math.abs(vel) * .02;
-      if(mqx <= -mqhalf) mqx += mqhalf;
-      mq.style.transform = `translate3d(${mqx}px,0,0)`;
-    }
+    if(!mqhalf) return;
+    mqx -= .9 + Math.abs(vel) * .05;
+    if(mqx <= -mqhalf) mqx += mqhalf;
+    mq.style.transform = `translate3d(${mqx}px,0,0)`;
   })();
 })();
 
 /* ==========================================================
-   8. CURSOR
+   7. CURSOR
 ========================================================== */
 if(matchMedia('(hover:hover)').matches){
   const cur = document.getElementById('cur'),
@@ -1301,7 +1305,7 @@ if(matchMedia('(hover:hover)').matches){
 }
 
 /* ==========================================================
-   9. SOUND — synthesised, off until asked
+   8. SOUND — synthesised, off until asked
 ========================================================== */
 const Snd = (() => {
   let ctx = null, on = false, bus = null;
@@ -1352,7 +1356,7 @@ const Snd = (() => {
   };
   btn.addEventListener('click', () => { Snd.toggle(); label(); });
   window.sndLabel = label;
-  document.querySelectorAll('a, button, .tk-row').forEach(el =>
+  document.querySelectorAll('a, button, .row').forEach(el =>
     el.addEventListener('pointerenter', () => Snd.play('hover')));
   addEventListener('pointerdown', e => { if(e.target.closest('a, button')) Snd.play('click'); });
   addEventListener('formation', () => Snd.play('morph'));
@@ -1360,7 +1364,7 @@ const Snd = (() => {
 })();
 
 /* ==========================================================
-   10. LATENCY CHECK
+   9. LATENCY CHECK
 ========================================================== */
 (function(){
   const pad = document.getElementById('pad'), padT = document.getElementById('padT'),
@@ -1415,60 +1419,70 @@ const Snd = (() => {
 })();
 
 /* ==========================================================
-   11. 日本語
+   10. 日本語
 ========================================================== */
 const JA = {
-// section labels
-  "About":"私について",
-  "Experience":"職務経歴",
-  "Toolkit":"技術スタック",
-  "Latency check":"レイテンシ計測",
-  "Contact":"お問い合わせ",
-
-  // hero
-  "CurrentlyFundastA — aviation information systems, with JAXA":
-    "現在<b>FundastA — JAXAと連携した航空情報システム</b>",
+  "About":
+    "私について",
+  "Experience":
+    "職務経歴",
+  "Latency check":
+    "レイテンシ計測",
+  "Contact":
+    "お問い合わせ",
+  "CurrentlyFundastA — aviation systems for a major Japanese aerospace client":
+    "現在<b>FundastA — 日本の大手航空宇宙企業向け航空システム</b>",
   "Five years building software that has to hold: distributed backends, mission-critical aviation platforms, and mobile products that ship to real users. Based in Nagoya, Japan.":
     "止まってはいけないソフトウェアを5年間つくってきました。<em>分散バックエンド、ミッションクリティカルな航空プラットフォーム、そして実際に使われるモバイルプロダクト。</em>愛知県名古屋市在住。",
-  "Scroll":"スクロール",
-  "Drag the title · click to shatter":"タイトルをドラッグ・クリックで分解",
-
-  // about
+  "Scroll":
+    "スクロール",
+  "Drag the title · click to shatter":
+    "タイトルをドラッグ・クリックで分解",
   "Five years of Java, Spring Boot and Flutter,":
-    "<span><span class=\"muted\">5年間の</span>Java・Spring Boot・Flutter、</span>",
+    "<span><span class=\\\"muted\\\">5年間の</span>Java・Spring Boot・Flutter、</span>",
   "spent on systems where failure is expensive":
-    "<span class=\"muted\">障害が高くつくシステムに携わってきました</span>",
-  "— airspace and disaster information, banking":
-    "<span class=\"muted\">— 空域・災害情報、銀行の本人認証、</span>",
+    "<span class=\\\"muted\\\">障害が高くつくシステムに携わってきました</span>",
   "authentication, real-time video pipelines.":
-    "<span class=\"muted\">リアルタイム動画処理基盤。</span>",
-  "Read more":"詳しく見る",
-  "I work at the point where a specification becomes a running system. At FundastA that means taking Japanese interface-control documents and turning them into message schemas, validation rules and integration services for an aviation information-management platform built with JAXA — disaster information, restricted airspace, aircraft targeting, mission assignment, delivery-status tracking.":
-    "仕様が実際に動くシステムになる地点で仕事をしています。FundastAでは、日本語のインターフェース仕様書を、JAXAと共同開発する航空情報管理プラットフォームのメッセージスキーマ、バリデーションルール、連携サービスへ落とし込んでいます。災害情報、飛行禁止空域、機体ターゲティング、任務アサイン、配信ステータス管理などが対象です。",
+    "<span class=\\\"muted\\\">リアルタイム動画処理基盤。</span>",
+  "Read more":
+    "詳しく見る",
+  "I work at the point where a specification becomes a running system. At FundastA that means taking Japanese interface-control documents and turning them into message schemas, validation rules and integration services for an aviation information-management platform built for a major Japanese aerospace client.":
+    "仕様が実際に動くシステムになる地点で仕事をしています。FundastAでは、日本語のインターフェース仕様書を、日本の大手航空宇宙企業向けに開発する航空情報管理プラットフォームのメッセージスキーマ、バリデーションルール、連携サービスへと落とし込んでいます。",
   "Before Japan I spent five years shipping mobile and backend products across fintech, media and education: liveness detection and OTP flows for a microfinance bank, a video-processing pipeline that survives bad networks, an ATM-monitoring platform, a learning system for schools. Different domains, same job — make the thing reliable, then make it explain itself when it isn't.":
     "来日前の5年間は、フィンテック・メディア・教育の領域でモバイルとバックエンドを開発してきました。マイクロファイナンス銀行の生体検知とOTP、不安定な回線でも壊れない動画処理基盤、ATM監視プラットフォーム、学校向けの学習システム。領域は違っても、やることは同じです。まず確実に動くようにし、動かないときに理由がわかるようにする。",
   "I like the unglamorous parts: integration testing, transmission state, why the queue drained but the client never updated. I'm most useful on a team that owns something people depend on.":
     "地味な部分が好きです。結合テスト、送信状態の管理、キューは捌けたのにクライアントが更新されない理由。誰かが依存しているものを預かるチームで、いちばん力になれると思っています。",
-
-  "Based in":"拠点", "Currently":"現在", "Languages":"語学", "Education":"学歴",
-  "Nagoya, Aichi, Japan":"愛知県名古屋市",
-  "Systems Engineer at FundastA, on an aviation information-management platform built with JAXA":
-    "FundastA システムエンジニア。JAXAと共同開発する航空情報管理プラットフォームを担当。",
-  "English — native / fluentJapanese — beginner":"英語 — ネイティブ／流暢<br>日本語 — 初級",
+  "Based in":
+    "拠点",
+  "Nagoya, Aichi, Japan":
+    "愛知県名古屋市",
+  "Systems Engineer at FundastA, contributing to aviation systems for a major Japanese aerospace client":
+    "FundastA システムエンジニア。日本の大手航空宇宙企業向けの航空システムを担当。",
+  "English — native / fluentJapanese — beginner":
+    "英語 — ネイティブ／流暢<br>日本語 — 初級",
   "Advanced Diploma in Software Engineering, Aptech Computer Education, 2018–2021":
     "Aptech Computer Education ソフトウェア工学 上級ディプロマ（2018–2021年）",
-
-  // project categories
-  "SV 01 Social video / Native media engineering":"<u>SV 01</u> ソーシャル動画 / ネイティブメディア開発",
-  "FT 01 Fintech / Authentication and security":"<u>FT 01</u> フィンテック / 認証・セキュリティ",
-  "NP 01 Non-profit / Donation processing":"<u>NP 01</u> 非営利 / 寄付決済",
-  "PR 01 Property / Estate management":"<u>PR 01</u> 不動産 / 物件管理",
-  "ED 01 Education / Learning management":"<u>ED 01</u> 教育 / 学習管理",
-  "SC 01 Social / Anonymous consultation":"<u>SC 01</u> ソーシャル / 匿名相談",
-  "LG 01 Logistics / Rider dispatch":"<u>LG 01</u> 物流 / 配達員配車",
-  "FO 01 Field operations / Project management":"<u>FO 01</u> 現場業務 / プロジェクト管理",
-
-  // project descriptions
+  "SG 01 SaaS / E-signature and contract management":
+    "<u>SG 01</u> SaaS / 電子署名・契約管理",
+  "Contract drafting, signing and tracking for the Japanese market. AI-assisted drafts, drag-and-drop signature fields, audit trails and tamper-evident PDFs. Built at FundastA.":
+    "日本市場向けの契約作成・署名・進捗管理。AIによる下書き生成、ドラッグ&ドロップの署名フィールド、監査証跡、改ざん検出付きPDF。FundastAにて開発。",
+  "Live site":"サイトを見る",
+  "SV 01 Social video / Native media engineering":
+    "<u>SV 01</u> ソーシャル動画 / ネイティブメディア開発",
+  "FT 01 Fintech / Authentication and security":
+    "<u>FT 01</u> フィンテック / 認証・セキュリティ",
+  "NP 01 Non-profit / Donation processing":
+    "<u>NP 01</u> 非営利 / 寄付決済",
+  "PR 01 Property / Estate management":
+    "<u>PR 01</u> 不動産 / 物件管理",
+  "ED 01 Education / Learning management":
+    "<u>ED 01</u> 教育 / 学習管理",
+  "SC 01 Social / Anonymous consultation":
+    "<u>SC 01</u> ソーシャル / 匿名相談",
+  "LG 01 Logistics / Rider dispatch":
+    "<u>LG 01</u> 物流 / 配達員配車",
+  "FO 01 Field operations / Project management":
+    "<u>FO 01</u> 現場業務 / プロジェクト管理",
   "Cross-platform social video application. Flutter, Swift, Objective-C, C++, FFmpeg, AVFoundation.":
     "クロスプラットフォームのソーシャル動画アプリ。Flutter、Swift、Objective-C、C++、FFmpeg、AVFoundation。",
   "Secure digital banking: authentication, savings, transfers, beneficiary management and transaction history. Java, PHP, TypeScript, Flutter, SwiftUI.":
@@ -1485,112 +1499,72 @@ const JA = {
     "配達員の配車と配送追跡。Flutter、Java。",
   "Project tracking for field teams. Python, Django, Flutter.":
     "現場チーム向けのプロジェクト管理。Python、Django、Flutter。",
-  "Rider app":"ライダー用アプリ",
-
-  // roles, companies, dates
-  "Systems Engineer":"システムエンジニア",
-  "Senior Software Engineer":"シニアソフトウェアエンジニア",
-  "Software Engineer":"ソフトウェアエンジニア",
-  "Intern":"インターン",
-  "FundastA — Nagoya, Japan":"FundastA <s>— 愛知県名古屋市</s>",
-  "Pingtop — London, UK (remote)":"Pingtop <s>— 英国ロンドン（リモート）</s>",
-  "Asset Matrix Microfinance Bank — Ikeja, Lagos, Nigeria":"Asset Matrix Microfinance Bank <s>— ナイジェリア・ラゴス州イケジャ</s>",
-  "Lytical Technology — Lekki, Lagos, Nigeria":"Lytical Technology <s>— ナイジェリア・ラゴス州レキ</s>",
-  "Zercom Systems — Victoria Island, Lagos, Nigeria":"Zercom Systems <s>— ナイジェリア・ラゴス州ビクトリアアイランド</s>",
-  "Off My Chest — Ikate, Lagos, Nigeria":"Off My Chest <s>— ナイジェリア・ラゴス州イカテ</s>",
-  "May 2026 — Present":"2026年5月 — 現在",
-  "Sep 2024 — 2026":"2024年9月 — 2026年",
-  "Aug 2023 — Sep 2024":"2023年8月 — 2024年9月",
-  "Jul 2022 — Aug 2023":"2022年7月 — 2023年8月",
-  "Apr 2021 — Jun 2022":"2021年4月 — 2022年6月",
-  "Feb 2019 — Jan 2021":"2019年2月 — 2021年1月",
-
-  // bullets — FundastA
-  "Engineer backend and integration components for a mission-critical aviation information-management platform delivered with JAXA and external aviation stakeholders.":
-    "<b>JAXA</b>および外部の航空関係機関と共同開発する<b>ミッションクリティカルな航空情報管理プラットフォーム</b>のバックエンドおよび連携コンポーネントを開発。",
-  "Design Java and Spring Boot services for disaster-information processing, restricted-airspace distribution, aircraft targeting, mission assignment and delivery-status tracking.":
-    "災害情報処理、飛行禁止空域の配信、機体ターゲティング、任務アサイン、配信ステータス管理を担うJava／Spring Bootサービスを設計。",
-  "Build asynchronous communication workflows with RabbitMQ and WebSockets, moving operational information reliably between web applications, backend services, communication components and aircraft-facing systems.":
-    "<b>RabbitMQとWebSocket</b>による非同期通信フローを構築し、Webアプリケーション、バックエンドサービス、通信コンポーネント、機体側システムの間で運用情報を確実に流通させる。",
-  "Design REST APIs and persistence workflows with Spring MVC, MyBatis and PostgreSQL, including caching, transmission-state management and external-system synchronisation.":
-    "<b>Spring MVC、MyBatis、PostgreSQL</b>によるREST APIと永続化フローを設計。キャッシュ、送信状態管理、外部システム連携を含む。",
-  "Convert Japanese interface-control documents and stakeholder requirements into production-ready message schemas, validation rules, integration services and frontend functionality.":
-    "日本語のインターフェース仕様書と関係者要件を、実運用に耐えるメッセージスキーマ、バリデーションルール、連携サービス、フロントエンド機能へ落とし込む。",
-  "Diagnose distributed-system failures involving authentication, HTTP routing, message queues, database state, WebSocket payloads and browser clients.":
-    "認証、HTTPルーティング、メッセージキュー、データベース状態、WebSocketペイロード、ブラウザクライアントにまたがる分散システム障害を切り分け。",
-  "Own features across requirements analysis, system design, implementation, integration testing, documentation, stakeholder review and Git-based delivery.":
-    "要件分析、システム設計、実装、結合テスト、技術文書、関係者レビュー、Gitベースの納品まで、機能単位でオーナーシップを持つ。",
-
-  // bullets — Pingtop
-  "Led the architecture and development of advanced video-editing capabilities: overlays, voice-over recording, music integration, compression and media manipulation across mobile platforms.":
-    "オーバーレイ、ボイスオーバー録音、音楽挿入、圧縮、メディア加工など、高度な動画編集機能のアーキテクチャと開発を主導。",
-  "Architected a resilient video-processing and upload pipeline using retries, background compilation, queue management and recoverable upload states, to hold up under unstable networks.":
-    "リトライ、バックグラウンド合成、キュー管理、再開可能なアップロード状態により、不安定な回線でも耐える動画処理・アップロード基盤を設計。",
-  "Implemented real-time media processing with FFmpeg, AVFoundation, Objective-C, Swift, C++ and Flutter, balancing output quality against device performance, memory and server load.":
-    "<b>FFmpeg、AVFoundation、Objective-C、Swift、C++、Flutter</b>でリアルタイムメディア処理を実装。出力品質と端末性能・メモリ・サーバ負荷のバランスを取る。",
-  "Built native platform integrations and used Dart isolates to run resource-intensive editing and upload work without blocking the interface.":
-    "ネイティブ連携と<b>Dart isolate</b>により、負荷の高い編集・アップロード処理をUIをブロックせずに実行。",
-  "Collaborated across product, design, backend and mobile teams on location, content-visibility, publishing and video-detail workflows, from specification through release.":
-    "プロダクト、デザイン、バックエンド、モバイル各チームと連携し、位置情報、公開範囲、投稿、動画詳細のフローを仕様からリリースまで担当。",
-
-  // bullets — Cashmatrix
-  "Built security-sensitive fintech features including liveness detection, facial recognition, OTP, fingerprint and location-based authentication.":
-    "生体検知、顔認証、OTP、指紋、位置情報ベースの認証など、セキュリティ要件の高いフィンテック機能を開発。",
-  "Developed the Matrix Saves feature and saved-beneficiary workflows for recurring deposits and faster repeat transactions.":
-    "積立機能「Matrix Saves」と受取人保存フローを開発し、定期入金と繰り返し取引を高速化。",
-  "Improved transaction-history performance through pagination, state-management optimisation and resilient API integration.":
-    "ページネーション、状態管理の最適化、堅牢なAPI連携により取引履歴のパフォーマンスを改善。",
-  "Integrated secure payment and financial-service APIs across mobile and backend components.":
-    "モバイルとバックエンドの双方で、決済および金融サービスAPIを安全に統合。",
-  "Worked with backend, security and product teams on payment flows, incident response, releases and production support.":
-    "バックエンド、セキュリティ、プロダクト各チームと、決済フロー、インシデント対応、リリース、本番サポートを担当。",
-
-  // bullets — Lytical
-  "Developed donation and estate-management products with Flutter, Java Spring Boot, Firebase and REST APIs.":
-    "<b>Flutter、Java Spring Boot、Firebase、REST API</b>で寄付および不動産管理プロダクトを開発。",
-  "Engineered backend services and database integrations for property management, visitor workflows, documentation, payments and real-time analytics.":
-    "物件管理、来訪者フロー、書類管理、決済、リアルタイム分析のためのバックエンドサービスとデータベース連携を構築。",
-  "Implemented secure payment-processing and data-protection controls aligned with fintech and PCI DSS requirements.":
-    "フィンテックおよび<b>PCI DSS</b>要件に沿った決済処理とデータ保護の統制を実装。",
-  "Delivered applications across the full lifecycle: requirements analysis, implementation, testing, deployment and production maintenance.":
-    "要件分析、実装、テスト、デプロイ、本番保守まで、ライフサイクル全体を担当。",
-
-  // bullets — Zercom
-  "Built and maintained an education platform supporting course delivery, learner progress tracking and educator–student communication.":
-    "講座配信、学習進捗の管理、教員と学生のコミュニケーションを支える教育プラットフォームを構築・保守。",
-  "Maintained an ATM-monitoring platform, improving observability, incident diagnosis, security controls and operational reliability.":
-    "ATM監視プラットフォームを保守し、可観測性、障害切り分け、セキュリティ統制、運用信頼性を改善。",
-  "Developed responsive application interfaces and integrated frontend applications with backend services and databases.":
-    "レスポンシブなUIを開発し、フロントエンドとバックエンドサービス・データベースを統合。",
-  "Supported system troubleshooting, application maintenance, testing and production releases.":
-    "システムのトラブルシューティング、アプリ保守、テスト、本番リリースを支援。",
-
-  // bullets — Off My Chest
-  "Contributed across the development lifecycle of an anonymous social platform using Java, Spring Boot, Flutter and Firebase.":
-    "Java、Spring Boot、Flutter、Firebaseを用いた匿名ソーシャルプラットフォームの開発ライフサイクル全体に参加。",
-  "Developed mobile and backend functionality enabling users to share personal experiences and access professional consultations securely.":
-    "ユーザーが自身の経験を共有し、専門家の相談に安全にアクセスできるモバイル・バックエンド機能を開発。",
-  "Assisted with API integration, application testing, debugging and production releases.":
-    "API連携、アプリケーションテスト、デバッグ、本番リリースを担当。",
-
-  // toolkit
-  "Backend":"バックエンド", "Distributed systems":"分散システム", "Databases":"データベース",
-  "Mobile & native":"モバイル・ネイティブ", "Frontend":"フロントエンド", "Infrastructure":"インフラ",
-
-  // latency check
+  "Rider app":
+    "ライダー用アプリ",
+  "Systems Engineer":
+    "システムエンジニア",
+  "Senior Software Engineer":
+    "シニアソフトウェアエンジニア",
+  "Software Engineer":
+    "ソフトウェアエンジニア",
+  "Intern":
+    "インターン",
+  "FundastA — Nagoya, Japan":
+    "FundastA <s>— 愛知県名古屋市</s>",
+  "Pingtop — London, UK (remote)":
+    "Pingtop <s>— 英国ロンドン（リモート）</s>",
+  "Asset Matrix Microfinance Bank — Ikeja, Lagos, Nigeria":
+    "Asset Matrix Microfinance Bank <s>— ナイジェリア・ラゴス州イケジャ</s>",
+  "Lytical Technology — Lekki, Lagos, Nigeria":
+    "Lytical Technology <s>— ナイジェリア・ラゴス州レキ</s>",
+  "Zercom Systems — Victoria Island, Lagos, Nigeria":
+    "Zercom Systems <s>— ナイジェリア・ラゴス州ビクトリアアイランド</s>",
+  "Off My Chest — Ikate, Lagos, Nigeria":
+    "Off My Chest <s>— ナイジェリア・ラゴス州イカテ</s>",
+  "May 2026 — Present":
+    "2026年5月 — 現在",
+  "Sep 2024 — 2026":
+    "2024年9月 — 2026年",
+  "Aug 2023 — Sep 2024":
+    "2023年8月 — 2024年9月",
+  "Jul 2022 — Aug 2023":
+    "2022年7月 — 2023年8月",
+  "Apr 2021 — Jun 2022":
+    "2021年4月 — 2022年6月",
+  "Feb 2019 — Jan 2021":
+    "2019年2月 — 2021年1月",
   "Everything on this page is about how fast information moves. Here's yours. Wait for amber, then click.":
     "このページはすべて「情報がどれだけ速く動くか」の話です。あなたの速さも測ってみてください。アンバーに変わったらクリック。",
-  "Your attempts":"あなたの記録", "For scale":"参考値",
-  "Nagoya → Tokyo, fibre":"名古屋 → 東京（光回線）",
-  "Nagoya → London, fibre":"名古屋 → ロンドン（光回線）",
-  "An eye blink":"まばたき一回",
-  "A frame at 60fps":"60fpsの1フレーム",
-
-  // contact
+  "Your attempts":
+    "あなたの記録",
+  "Nagoya → Tokyo, fibre":
+    "名古屋 → 東京（光回線）",
+  "Nagoya → London, fibre":
+    "名古屋 → ロンドン（光回線）",
+  "An eye blink":
+    "まばたき一回",
+  "A frame at 60fps":
+    "60fpsの1フレーム",
   "Got a role, a project, or a system that needs untangling? I read everything.":
     "ポジション、プロジェクト、あるいは絡まったシステム。どれでもお気軽にご連絡ください。すべて目を通します。",
-  "Email":"メール", "Elsewhere":"その他", "Résumé":"履歴書", "Location":"所在地",
-  "Download":"ダウンロード"
+  "Email":
+    "メール",
+  "Download":
+    "ダウンロード",
+  "Lagos, then London, now Nagoya. Six roles, read from the present backwards. The through-line is the same one every time: own the thing end to end, and make it explain itself when it breaks.":
+    "<b>ラゴス、ロンドン、そして名古屋。</b>6つの役割を、現在から遡って。共通しているのは毎回同じことです。最初から最後まで自分で持ち、壊れたときに理由がわかるようにする。",
+  "FundastA builds an aviation information-management platform for a major Japanese aerospace client. I work on the backend and on the seams between systems — the services that move operational information between web applications, backend components and aircraft-facing systems, and the message contracts that keep them all honest. A good part of the job is translation: Japanese interface-control documents in one hand, production services in the other. The rest is diagnosis, because in a distributed system the interesting failure is never where the error appears.":
+    "FundastAは<b>日本の大手航空宇宙企業</b>向けに航空情報管理プラットフォームを開発しています。私が担当しているのはバックエンドと、システム同士のつなぎ目です。Webアプリケーション、バックエンドコンポーネント、機体側システムの間で運用情報を運ぶサービスと、それらを整合させるメッセージ仕様。仕事の多くは翻訳です。片手に日本語のインターフェース仕様書、もう片手に本番サービス。残りは切り分けです。分散システムでは、本当の原因はエラーが出た場所にはありません。",
+  "A social video app, which meant living inside the media pipeline. I led the editing capabilities — overlays, voice-over, music, compression — and rebuilt the upload path so it survives a bad connection: retries, background compilation, recoverable state. Real-time processing in FFmpeg and AVFoundation is a permanent negotiation between output quality, device heat and server cost. Dart isolates and native bridges kept the interface responsive while all of that ran underneath it.":
+    "ソーシャル動画アプリ。つまりメディア処理基盤の中で暮らすということです。編集機能（オーバーレイ、ボイスオーバー、音楽、圧縮）を主導し、回線が悪くても壊れないアップロード経路を作り直しました。リトライ、バックグラウンド合成、再開可能な状態管理。<b>FFmpegとAVFoundation</b>でのリアルタイム処理は、出力品質と端末の発熱、サーバコストとの終わらない交渉です。Dart isolateとネイティブ連携で、その裏側が動いている間もUIは止めずに済みました。",
+  "Banking, where the stakes are other people's money. I built the authentication surface — liveness detection, facial recognition, OTP, fingerprint — and the savings and beneficiary flows people actually touch every day. Two habits came out of it: treat every integration as hostile until it proves otherwise, and sit in the incident call rather than read the write-up afterwards.":
+    "銀行、つまり他人のお金が懸かる場所です。認証まわり（生体検知、顔認証、OTP、指紋）と、利用者が毎日触れる貯蓄・受取人管理のフローを作りました。ここで身についた習慣が二つあります。すべての外部連携は、安全だと確認できるまで敵とみなすこと。そして障害の報告書を後で読むのではなく、その場の対応に入ること。",
+  "Two products, donation and estate management, built end to end in Flutter and Spring Boot. This is where I stopped being handed specifications and started writing them — requirements, implementation, testing, deployment, and the long tail of production maintenance that eventually tells you what you got wrong.":
+    "寄付と不動産管理という二つのプロダクトを、<b>FlutterとSpring Boot</b>で最初から最後まで。仕様を渡される側から、書く側になったのがここです。要件定義、実装、テスト、デプロイ、そして自分が何を間違えたかを最後に教えてくれる長い本番保守まで。",
+  "An education platform and an ATM-monitoring system, which sounds like two jobs and turned out to be the same problem twice. Both were things people quietly depended on, and both taught me that observability isn't a feature you bolt on once something has already gone wrong.":
+    "教育プラットフォームとATM監視システム。別の仕事のようで、実際は同じ問題を二度解いていました。どちらも人が静かに依存しているものです。可観測性は、何かが起きてから後付けする機能ではないと学びました。",
+  "My first engineering job, on an anonymous platform where people shared things they couldn't say out loud and reached professional help. Java, Spring Boot, Flutter, Firebase. Two years of shipping small pieces of something that genuinely mattered to the people using it, which set the bar for everything after.":
+    "最初のエンジニアの仕事。声に出せないことを共有し、専門家の助けにつながるための匿名プラットフォームでした。Java、Spring Boot、Flutter、Firebase。使っている人にとって本当に意味のあるものの、小さな部品を出し続けた2年間。その後の基準になりました。"
 };
 
 const CURSOR_JA = {
@@ -1599,8 +1573,8 @@ const CURSOR_JA = {
 };
 const MQ_JA = "話しましょう <b></b> はじめまして <b></b> 一緒につくりましょう <b></b>";
 
-const I18N_SEL = '.tag, .hero-top, .cue, .grab-hint, .about h2, #moreBtn, .more p, .facts dt, .facts dd, ' +
-  '.row-cat, .stackline, .row-links a, .job h3, .job .co, .job time, .job li, .tk-label, ' +
+const I18N_SEL = '.tag, .hero-top, .cue, .grab-hint, .hero-role, .about h2, #moreBtn, .more p, .facts dt, .facts dd, ' +
+  '.row-cat, .stackline, .row-links a, .job h3, .job .co, .job time, .job p, .exp-lead, ' +
   '.lat-lead, .lat-h, #padRef dt, .cta-lead p, .contact-grid dt, .contact-grid dd, ' +
   '.contact-grid a, .topbar a.link';
 
@@ -1645,7 +1619,7 @@ document.getElementById('langBtn').addEventListener('click', () => {
 });
 
 /* ==========================================================
-   12. ODDS AND ENDS
+   11. ODDS AND ENDS
 ========================================================== */
 function tick(){
   const t = new Intl.DateTimeFormat('en-GB', {
@@ -1675,7 +1649,7 @@ cp.addEventListener('click', async () => {
 (function(){
   const f = document.getElementById('form');
   if(!f) return;
-  const targets = ['.hero','#about','#work','#experience','#skills','#contact'];
+  const targets = ['.hero','#about','#work','#experience','#play','#contact'];
   let n = 0;
   f.addEventListener('click', () => {
     n = (n + 1) % targets.length;
