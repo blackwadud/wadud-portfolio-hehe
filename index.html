@@ -57,9 +57,7 @@ a{color:inherit;text-decoration:none}
 #preline{position:fixed;left:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--ember),var(--amber));width:0;z-index:201;transition:width .3s linear,opacity .5s}
 
 #cur{position:fixed;top:0;left:0;z-index:150;pointer-events:none;width:44px;height:44px;margin:-22px 0 0 -22px;border:1px solid rgba(210,69,30,.85);border-radius:50%;display:grid;place-items:center;transition:background .3s,border-color .3s}
-#cur span{font-size:9.5px;letter-spacing:.08em;opacity:0;transform:scale(.6);transition:opacity .3s,transform .3s;color:var(--void);font-weight:600;white-space:nowrap}
-#cur.lbl{background:var(--amber);border-color:var(--amber)}
-#cur.lbl span{opacity:1;transform:none}
+#cur.on{background:rgba(255,176,58,.13);border-color:var(--amber)}
 #dot{position:fixed;top:0;left:0;z-index:151;pointer-events:none;width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--amber);border-radius:50%;transition:opacity .3s}
 #dot.hide{opacity:0}
 @media(hover:none),(max-width:860px){#cur,#dot{display:none}}
@@ -254,7 +252,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 <canvas id="gl"></canvas>
 <div id="veil"></div>
 
-<div id="cur"><span></span></div><div id="dot"></div>
+<div id="cur"></div><div id="dot"></div>
 <div id="bar"></div>
 <div id="form"><i></i><span id="formName">TITLE</span></div>
 
@@ -263,9 +261,9 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
   <div class="r">
     <span><b id="clock">--:--:--</b>, Nagoya</span>
     <span class="tb-btns">
-      <button id="langBtn" class="tb-btn" data-cur="切替">日本語</button>
-      <button id="sndBtn" class="tb-btn" data-cur="Sound" aria-pressed="false"><i></i>Sound off</button>
-      <a class="link" href="#contact" data-cur="Say hi">Contact</a>
+      <button id="langBtn" class="tb-btn">日本語</button>
+      <button id="sndBtn" class="tb-btn" aria-pressed="false"><i></i>Sound off</button>
+      <a class="link" href="#contact">Contact</a>
     </span>
   </div>
 </div>
@@ -279,7 +277,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
   <div class="hero-foot">
     <p id="heroP">Five years building software that has to hold: <em>distributed backends, mission-critical aviation platforms, and mobile products that ship to real users.</em> Based in Nagoya, Japan.</p>
     <div class="hero-right">
-      <div class="grab-hint" id="grabHint">Drag the title · click to shatter</div>
+      <div class="grab-hint" id="grabHint">Drag to spin · click to shatter</div>
       <div class="cue" id="heroCue"><i></i> Scroll</div>
     </div>
   </div>
@@ -292,7 +290,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
   <h2 class="msk"><span class="muted">— aviation information systems, banking</span></h2>
   <h2 class="msk"><span class="muted">authentication, real-time video pipelines.</span></h2>
 
-  <button id="moreBtn" data-cur="Expand" aria-expanded="false" aria-controls="moreBody">Read more</button>
+  <button id="moreBtn" aria-expanded="false" aria-controls="moreBody">Read more</button>
   <div class="more" id="moreBody">
     <div>
       <p>I work at the point where a specification becomes a running system. At FundastA that means taking Japanese interface-control documents and turning them into message schemas, validation rules and integration services for an aviation information-management platform built for a major Japanese aerospace client.</p>
@@ -319,7 +317,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>FUNDASIGN</h3>
         <div class="stackline">Contract drafting, signing and tracking for the Japanese market. AI-assisted drafts, drag-and-drop signature fields, audit trails and tamper-evident PDFs. Built at FundastA.</div>
-        <div class="row-links"><a href="https://main.dik7on7j0fdhy.amplifyapp.com/" target="_blank" rel="noopener" data-cur="Open">Live site</a></div>
+        <div class="row-links"><a href="https://main.dik7on7j0fdhy.amplifyapp.com/" target="_blank" rel="noopener">Live site</a></div>
       </div>
 
       <div class="row fu">
@@ -329,7 +327,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>Pingtop</h3>
         <div class="stackline">Cross-platform social video application. Flutter, Swift, Objective-C, C++, FFmpeg, AVFoundation.</div>
-        <div class="row-links"><a href="https://apps.apple.com/gb/app/tezda/id6470659417" target="_blank" rel="noopener" data-cur="Open">App Store</a></div>
+        <div class="row-links"><a href="https://apps.apple.com/gb/app/tezda/id6470659417" target="_blank" rel="noopener">App Store</a></div>
       </div>
 
       <div class="row fu">
@@ -339,7 +337,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>Cashmatrix</h3>
         <div class="stackline">Secure digital banking: authentication, savings, transfers, beneficiary management and transaction history. Java, PHP, TypeScript, Flutter, SwiftUI.</div>
-        <div class="row-links"><a href="https://apps.apple.com/ng/app/cashmatrix/id6470770885?platform=iphone" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.assetcashmatrix.mfb&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+        <div class="row-links"><a href="https://apps.apple.com/ng/app/cashmatrix/id6470770885?platform=iphone" target="_blank" rel="noopener">App Store</a><a href="https://play.google.com/store/apps/details?id=com.assetcashmatrix.mfb&hl=en_US" target="_blank" rel="noopener">Play Store</a></div>
       </div>
 
       <div class="row fu">
@@ -349,7 +347,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>Givegle</h3>
         <div class="stackline">Donation platform. Flutter, Firebase, Cloud Firestore, Google Cloud Functions.</div>
-        <div class="row-links"><a href="https://apps.apple.com/us/app/givegle/id6444736439" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.lyticaltechnology.givegle" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+        <div class="row-links"><a href="https://apps.apple.com/us/app/givegle/id6444736439" target="_blank" rel="noopener">App Store</a><a href="https://play.google.com/store/apps/details?id=com.lyticaltechnology.givegle" target="_blank" rel="noopener">Play Store</a></div>
       </div>
 
       <div class="row fu">
@@ -359,7 +357,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>Silverstone Managers</h3>
         <div class="stackline">Property management, visitor workflows and documentation. Java, Spring Boot, Flutter, C++.</div>
-        <div class="row-links"><a href="https://apps.apple.com/us/app/silverstone-managers/id1660094677" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.pennyworth.middlechase" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+        <div class="row-links"><a href="https://apps.apple.com/us/app/silverstone-managers/id1660094677" target="_blank" rel="noopener">App Store</a><a href="https://play.google.com/store/apps/details?id=com.pennyworth.middlechase" target="_blank" rel="noopener">Play Store</a></div>
       </div>
 
       <div class="row fu">
@@ -369,7 +367,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>Tangerine LMS</h3>
         <div class="stackline">Course delivery, learner progress tracking and educator communication. Python, Java, Flutter.</div>
-        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.zercomsystems.tangerinelms" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.zercomsystems.tangerinelms" target="_blank" rel="noopener">Play Store</a></div>
       </div>
 
       <div class="row fu">
@@ -379,7 +377,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>Off My Chest</h3>
         <div class="stackline">Anonymous social platform with secure access to professional consultation. Flutter, Python, Java, Spring Boot, Firebase.</div>
-        <div class="row-links"><a href="https://apps.apple.com/us/app/off-my-chest/id1532639828" target="_blank" rel="noopener" data-cur="Open">App Store</a><a href="https://play.google.com/store/apps/details?id=com.omc.offmychest" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+        <div class="row-links"><a href="https://apps.apple.com/us/app/off-my-chest/id1532639828" target="_blank" rel="noopener">App Store</a><a href="https://play.google.com/store/apps/details?id=com.omc.offmychest" target="_blank" rel="noopener">Play Store</a></div>
       </div>
 
       <div class="row fu">
@@ -389,7 +387,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>FoodHutz</h3>
         <div class="stackline">Rider dispatch and delivery tracking. Flutter, Java.</div>
-        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.foodhutz.riders&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Rider app</a></div>
+        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.foodhutz.riders&hl=en_US" target="_blank" rel="noopener">Rider app</a></div>
       </div>
 
       <div class="row fu">
@@ -399,7 +397,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
         </div>
         <h3>Xero Projects</h3>
         <div class="stackline">Project tracking for field teams. Python, Django, Flutter.</div>
-        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.xero.projects&hl=en_US" target="_blank" rel="noopener" data-cur="Open">Play Store</a></div>
+        <div class="row-links"><a href="https://play.google.com/store/apps/details?id=com.xero.projects&hl=en_US" target="_blank" rel="noopener">Play Store</a></div>
       </div>
   </div>
 </section>
@@ -446,7 +444,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
   <div class="tag"><s></s> Latency check</div>
   <p class="lat-lead fu">Everything on this page is about how fast information moves. Here's yours. Wait for amber, then click.</p>
   <div class="lat fu">
-    <button id="pad" class="pad" data-cur="Start">
+    <button id="pad" class="pad">
       <span class="pad-t" id="padT">Click to arm</span>
       <span class="pad-s" id="padS">Then wait for the colour</span>
     </button>
@@ -469,19 +467,19 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
     <div class="tag"><s></s> Contact</div>
     <p class="fu">Got a role, a project, or a system that needs untangling? I read everything.</p>
   </div>
-  <a class="mq" href="mailto:bakaretim18@gmail.com?subject=Let%27s%20work%20together" data-cur="Email">
+  <a class="mq" href="mailto:bakaretim18@gmail.com?subject=Let%27s%20work%20together">
     <div class="mq-in" id="mq">
       <span>Let's talk <b></b> Say hello <b></b> Let's build something <b></b></span>
       <span>Let's talk <b></b> Say hello <b></b> Let's build something <b></b></span>
     </div>
   </a>
   <dl class="contact-grid">
-    <div><dt>Email</dt><button id="copy" data-mail="bakaretim18@gmail.com" data-cur="Copy">bakaretim18@gmail.com</button></div>
+    <div><dt>Email</dt><button id="copy" data-mail="bakaretim18@gmail.com">bakaretim18@gmail.com</button></div>
     <div><dt>Elsewhere</dt>
-      <a href="https://github.com/blackwadud" target="_blank" rel="noopener" data-cur="Open">GitHub</a>
-      <a href="https://www.linkedin.com/in/blackwadud/" target="_blank" rel="noopener" data-cur="Open">LinkedIn</a>
+      <a href="https://github.com/blackwadud" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/blackwadud/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <div><dt>Résumé</dt><a href="resume.pdf" target="_blank" rel="noopener" data-cur="PDF">Download</a></div>
+    <div><dt>Résumé</dt><a href="resume.pdf" target="_blank" rel="noopener">Download</a></div>
     <div><dt>Location</dt><dd>Nagoya, Aichi, Japan</dd></div>
   </dl>
   <footer>
@@ -928,6 +926,261 @@ async function initGL(){
     cGeo.attributes.aA.needsUpdate = true;
   }
 
+
+  /* ==========================================================
+     BACKGROUND 4 — DEBRIS
+     Two dozen wireframe solids tumbling through the field on
+     their own axes, wrapping around when they drift out. Gives
+     the space a sense of scale the point clouds can't.
+  ========================================================== */
+  const debris = [];
+  const dShapes = [
+    new THREE.TetrahedronGeometry(.18),
+    new THREE.OctahedronGeometry(.15),
+    new THREE.IcosahedronGeometry(.13),
+    new THREE.BoxGeometry(.19, .19, .19)
+  ];
+  function debrisMat(){
+    return new THREE.MeshBasicMaterial({
+      color: 0xFFB03A, wireframe: true, transparent: true,
+      opacity: .26, blending: THREE.AdditiveBlending, depthWrite: false
+    });
+  }
+  const DCOUNT = innerWidth < 760 ? 10 : 24;
+  for(let i = 0; i < DCOUNT; i++){
+    const m = new THREE.Mesh(dShapes[i % dShapes.length], debrisMat());
+    m.position.set(
+      (Math.random() - .5) * 15,
+      (Math.random() - .5) * 9,
+      -1 - Math.random() * 5
+    );
+    const sc = .5 + Math.random() * 1.4;
+    m.scale.setScalar(sc);
+    m.userData = {
+      base: .26,
+      glow: 0,
+      held: false,
+      vx: (Math.random() - .5) * .010,
+      vy: (Math.random() - .5) * .006,
+      rx: (Math.random() - .5) * .012,
+      ry: (Math.random() - .5) * .012,
+      rz: (Math.random() - .5) * .008,
+      sc
+    };
+    debris.push(m);
+    scene.add(m);
+  }
+
+  function stepDebris(vel, intro){
+    for(const m of debris){
+      const u = m.userData;
+      m.material.opacity = u.base * intro;
+      m.position.x += u.vx + vel * .0016;
+      m.position.y += u.vy - vel * .0042;    // scroll drags them past
+      m.rotation.x += u.rx;
+      m.rotation.y += u.ry;
+      m.rotation.z += u.rz;
+      if(m.position.x >  8.4) m.position.x = -8.4;
+      if(m.position.x < -8.4) m.position.x =  8.4;
+      if(m.position.y >  5.2) m.position.y = -5.2;
+      if(m.position.y < -5.2) m.position.y =  5.2;
+    }
+  }
+
+  /* ==========================================================
+     BACKGROUND 5 — WARP STREAKS
+     Six hundred line segments sitting invisible until you move.
+     Their length and opacity come straight off scroll velocity,
+     so scrolling hard rips the whole field past you.
+  ========================================================== */
+  const WN = innerWidth < 760 ? 260 : 600;
+  const wPos = new Float32Array(WN * 6);       // two vertices per streak
+  const wBase = [];
+  for(let i = 0; i < WN; i++){
+    const b = [
+      (Math.random() - .5) * 17,
+      (Math.random() - .5) * 11,
+      -.5 - Math.random() * 7
+    ];
+    wBase.push(b);
+    wPos[i*6]   = b[0]; wPos[i*6+1] = b[1]; wPos[i*6+2] = b[2];
+    wPos[i*6+3] = b[0]; wPos[i*6+4] = b[1]; wPos[i*6+5] = b[2];
+  }
+  const wGeo = new THREE.BufferGeometry();
+  wGeo.setAttribute('position', new THREE.BufferAttribute(wPos, 3));
+  const wMat = new THREE.LineBasicMaterial({
+    color: 0xFFC24B, transparent: true, opacity: 0,
+    blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  const warp = new THREE.LineSegments(wGeo, wMat);
+  warp.frustumCulled = false;
+  scene.add(warp);
+
+  let warpLen = 0;
+  function stepWarp(vel){
+    const want = clamp(Math.abs(vel) / 70, 0, 1);
+    warpLen = lerp(warpLen, want, .12);
+    wMat.opacity = warpLen * .42;
+    if(warpLen < .004) return;
+    const dir = vel >= 0 ? 1 : -1;
+    for(let i = 0; i < WN; i++){
+      const b = wBase[i];
+      const L = warpLen * (1.1 + (i % 7) * .34) * dir;
+      wPos[i*6+3] = b[0];
+      wPos[i*6+4] = b[1] + L;
+      wPos[i*6+5] = b[2];
+    }
+    wGeo.attributes.position.needsUpdate = true;
+  }
+
+  /* ==========================================================
+     PORTRAIT
+     If a portrait.jpg sits next to this file, its pixels are
+     sampled by brightness into the CORE formation — so the
+     cloud resolves into a face at the end of the page. Missing
+     file just leaves the original core shape in place.
+  ========================================================== */
+  (function loadPortrait(){
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const W2 = 520, H2 = Math.round(W2 * img.height / img.width);
+        const cv = document.createElement('canvas');
+        cv.width = W2; cv.height = H2;
+        const cx2 = cv.getContext('2d', {willReadFrequently:true});
+        cx2.drawImage(img, 0, 0, W2, H2);
+        const px = cx2.getImageData(0, 0, W2, H2).data;
+
+        // keep pixels in proportion to how bright they are
+        const pool = [];
+        for(let y = 0; y < H2; y += 2){
+          for(let x2 = 0; x2 < W2; x2 += 2){
+            const o = (y * W2 + x2) * 4;
+            const l = (px[o] * .299 + px[o+1] * .587 + px[o+2] * .114) / 255;
+            if(px[o+3] > 40 && l > .10) pool.push(x2, y, l);
+          }
+        }
+        if(pool.length < 300) return;
+
+        const SW2 = 3.4, SH2 = SW2 * (H2 / W2);
+        const n3 = pool.length / 3;
+        for(let i = 0; i < N; i++){
+          const k = ((Math.random() * n3) | 0) * 3;
+          const l = pool[k+2];
+          P5[i*3]   = (pool[k]   / W2 - .5) * SW2 + (Math.random() - .5) * .012;
+          P5[i*3+1] = -(pool[k+1] / H2 - .5) * SH2 + (Math.random() - .5) * .012;
+          P5[i*3+2] = (l - .5) * .85 + (Math.random() - .5) * .05;   // brightness as depth
+        }
+        geo.attributes.aP5.needsUpdate = true;
+        FORMATIONS[5] = 'PORTRAIT';
+      } catch(e){ /* cross-origin or decode trouble: keep the core */ }
+    };
+    img.onerror = () => {};
+    img.src = 'portrait.jpg';
+  })();
+
+
+  /* ==========================================================
+     THE BUST
+     A Roman head with a city carved into the skull. It watches
+     the cursor, can be spun by hand, and fades out as the page
+     leaves the hero so the formations get the stage back.
+     Loaded after the intro so it never blocks first paint.
+  ========================================================== */
+  let bust = null, bustReady = 0, bustH = 1.9;   // measured height of the export
+  const bustLook = {x:0, y:0};
+
+  // lit separately from the point clouds — additive points ignore lights,
+  // so these only ever touch the marble
+  const key = new THREE.DirectionalLight(0xFFF3E2, 2.5);
+  key.position.set(-2.4, 3.0, 3.4);
+  scene.add(key);
+  const rim = new THREE.PointLight(0xD2451E, 14, 12, 2);
+  rim.position.set(2.8, .6, -2.2);
+  scene.add(rim);
+  const fill = new THREE.HemisphereLight(0xFFB03A, 0x0A0704, .55);
+  scene.add(fill);
+
+  (async function loadBust(){
+    const base = 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/';
+    let GLTFLoader;
+    try {
+      ({GLTFLoader} = await import(base + 'loaders/GLTFLoader.js'));
+    } catch(err){
+      console.warn('bust: loader unavailable —', err.message);
+      return;
+    }
+
+    // Two routes. The meshopt build is 1.2MB but needs a worker-backed
+    // decoder, which some sandboxed frames refuse. If that path fails for
+    // any reason we fall back to the plain 4.1MB file, which needs nothing.
+    async function attempt(useMeshopt){
+      const loader = new GLTFLoader();
+      if(useMeshopt){
+        const {MeshoptDecoder} = await import(base + 'libs/meshopt_decoder.module.js');
+        await MeshoptDecoder.ready;               // surfaces worker failures here
+        loader.setMeshoptDecoder(MeshoptDecoder);
+      }
+      return loader.loadAsync(useMeshopt ? 'bust.glb' : 'bust-plain.glb');
+    }
+
+    let gltf = null;
+    try {
+      gltf = await attempt(true);
+    } catch(err){
+      console.warn('bust: compressed route failed (' + err.message + '), trying plain');
+      try { gltf = await attempt(false); }
+      catch(err2){ console.warn('bust unavailable:', err2.message); return; }
+    }
+    if(!gltf) return;
+
+    const model = gltf.scene;
+
+    // normalise: the export is ~1.9 units tall and faces +Z
+    const box = new THREE.Box3().setFromObject(model);
+    const size = new THREE.Vector3(); box.getSize(size);
+    const mid = new THREE.Vector3(); box.getCenter(mid);
+    model.position.sub(mid);                      // pivot at its middle
+    const wrap = new THREE.Group();
+    wrap.add(model);
+    bustH = size.y || 1.9;
+    wrap.scale.setScalar((innerWidth < 760 ? 2.1 : 3.0) / bustH);
+    wrap.position.set(0, -.18, -1.35);            // sits behind the name
+
+    model.traverse(o => {
+      if(!o.isMesh || !o.material) return;
+      o.castShadow = o.receiveShadow = false;
+      o.material.transparent = true;
+      o.material.opacity = 0;
+      o.material.envMapIntensity = .4;
+    });
+
+    scene.add(wrap);
+    bust = wrap;
+  })();
+
+  function stepBust(crisp){
+    if(!bust) return;
+    bustReady = lerp(bustReady, crisp, .045);          // fades in, then out on scroll
+
+    // watch the pointer: yaw follows x, a little pitch from y
+    bustLook.y = lerp(bustLook.y, -sm.x * .62, .055);
+    bustLook.x = lerp(bustLook.x,  sm.y * .30, .055);
+
+    bust.rotation.y = bustLook.y + orbY * 1.35;        // hand-spin rides on top
+    bust.rotation.x = bustLook.x + orbX * .8;
+    bust.position.y = -.18 + Math.sin(uni.uTime.value * .35) * .045;   // slow breath
+    bust.visible = bustReady > .01;
+
+    bust.traverse(o => {
+      if(o.isMesh && o.material) o.material.opacity = bustReady * .96;
+    });
+    key.intensity  = 2.5 * bustReady;
+    rim.intensity  = 14 * bustReady;
+    fill.intensity = .55 * bustReady;
+  }
+
   let fitScale = 1;
   function resize(){
     renderer.setSize(innerWidth, innerHeight, false);
@@ -936,12 +1189,13 @@ async function initGL(){
     const visW = 2 * cam.position.z * Math.tan((cam.fov * Math.PI/180)/2) * cam.aspect;
     fitScale = Math.min(1, (visW * .90) / 5.6);     // keep the words on screen
     nebUni.uAspect.value = cam.aspect;
+    if(bust) bust.scale.setScalar((innerWidth < 760 ? 2.1 : 3.0) / bustH);
   }
   addEventListener('resize', resize);
   resize();
 
   let ptr = {x:0,y:0}, sm = {x:0,y:0};
-  let phase = 0, smPhase = 0, phaseVel = 0, spin = 0;
+  let phase = 0, smPhase = 0, phaseVel = 0, spin = 0, lastVel = 0;
   let energy = 0, smEnergy = 0, intro = 0, fade = 1, smFade = 1;
 
   addEventListener('pointermove', e => {
@@ -1006,6 +1260,7 @@ async function initGL(){
     let idx = 0;
     anchors.forEach((a, i) => { if(a.el.getBoundingClientRect().top <= mid) idx = i; });
     phase = anchors[idx].ph;
+    lastVel = vel;
     energy = Math.max(energy, clamp(Math.abs(vel) / 95, 0, .8));
     fade = 1 - clamp((y - innerHeight * .4) / (innerHeight * 1.1)) * .26;
 
@@ -1062,6 +1317,8 @@ async function initGL(){
     burst *= .93;
     uni.uEnergy.value = smEnergy + burst * 1.5;
 
+    stepBust(crisp);
+
     const churn = Math.min(1, Math.abs(phaseVel) * 22);
     spin += (.0016 + smEnergy * .006 + churn * .012) * crisp;
     pts.rotation.y = spin + orbY;
@@ -1086,7 +1343,11 @@ async function initGL(){
 
     cUni.uPR.value = uni.uPR.value;
     cUni.uIntro.value = intro;
-    if(!RM) stepComets();
+    if(!RM){
+      stepComets();
+      stepDebris(lastVel, intro);
+      stepWarp(lastVel);
+    }
 
     renderer.autoClear = false;
     renderer.clear();
@@ -1268,9 +1529,9 @@ function decode(el){
 ========================================================== */
 if(matchMedia('(hover:hover)').matches){
   const cur = document.getElementById('cur'),
-        dot = document.getElementById('dot'),
-        lbl = cur.firstElementChild;
-  let mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my, scale = 1, tScale = 1, base = 1;
+        dot = document.getElementById('dot');
+  let mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my,
+      scale = 1, tScale = 1, base = 1, domHover = false;
 
   addEventListener('pointermove', e => {
     mx = e.clientX; my = e.clientY;
@@ -1285,22 +1546,24 @@ if(matchMedia('(hover:hover)').matches){
     requestAnimationFrame(loop);
   })();
 
-  document.querySelectorAll('[data-cur], a, button').forEach(el => {
-    const text = el.dataset.cur;
-    el.addEventListener('pointerenter', () => {
-      if(text){ lbl.textContent = text; cur.classList.add('lbl'); dot.classList.add('hide'); base = tScale = 1.55; }
-      else base = tScale = 1.28;
-    });
-    el.addEventListener('pointerleave', () => {
-      cur.classList.remove('lbl'); dot.classList.remove('hide'); base = tScale = 1;
-    });
+  // interactive things swell the ring — no text
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('pointerenter', () => { domHover = true; base = tScale = 1.42; cur.classList.add('on'); });
+    el.addEventListener('pointerleave', () => { domHover = false; base = tScale = 1; cur.classList.remove('on'); });
   });
+
+  // the scene swells it too, for the solids
+  window.setCursorActive = on => {
+    if(domHover) return;
+    base = tScale = on ? 1.42 : 1;
+    cur.classList.toggle('on', !!on);
+  };
 
   let st;
   Scroll.on(() => {
-    if(!cur.classList.contains('lbl')) tScale = base * .8;
+    tScale = base * .8;
     clearTimeout(st);
-    st = setTimeout(() => { if(!cur.classList.contains('lbl')) tScale = base; }, 150);
+    st = setTimeout(() => tScale = base, 150);
   });
 }
 
@@ -1436,8 +1699,8 @@ const JA = {
     "止まってはいけないソフトウェアを5年間つくってきました。<em>分散バックエンド、ミッションクリティカルな航空プラットフォーム、そして実際に使われるモバイルプロダクト。</em>愛知県名古屋市在住。",
   "Scroll":
     "スクロール",
-  "Drag the title · click to shatter":
-    "タイトルをドラッグ・クリックで分解",
+  "Drag to spin · click to shatter":
+    "ドラッグで回す・クリックで分解",
   "Five years of Java, Spring Boot and Flutter,":
     "<span><span class=\\\"muted\\\">5年間の</span>Java・Spring Boot・Flutter、</span>",
   "spent on systems where failure is expensive":
@@ -1567,10 +1830,7 @@ const JA = {
     "最初のエンジニアの仕事。声に出せないことを共有し、専門家の助けにつながるための匿名プラットフォームでした。Java、Spring Boot、Flutter、Firebase。使っている人にとって本当に意味のあるものの、小さな部品を出し続けた2年間。その後の基準になりました。"
 };
 
-const CURSOR_JA = {
-  "View":"見る","Open":"開く","Copy":"コピー","Email":"メール","PDF":"PDF",
-  "Expand":"開く","Say hi":"挨拶","Start":"開始","Sound":"音"
-};
+const JA_END = 1;
 const MQ_JA = "話しましょう <b></b> はじめまして <b></b> 一緒につくりましょう <b></b>";
 
 const I18N_SEL = '.tag, .hero-top, .cue, .grab-hint, .hero-role, .about h2, #moreBtn, .more p, .facts dt, .facts dd, ' +
@@ -1593,11 +1853,6 @@ function setLang(next){
     } else {
       el.innerHTML = el.dataset.en;
     }
-  });
-
-  document.querySelectorAll('[data-cur]').forEach(el => {
-    if(el.dataset.curEn === undefined) el.dataset.curEn = el.dataset.cur;
-    el.dataset.cur = next === 'ja' ? (CURSOR_JA[el.dataset.curEn] || el.dataset.curEn) : el.dataset.curEn;
   });
 
   document.querySelectorAll('.mq-in span').forEach(sp => {
