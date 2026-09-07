@@ -1090,8 +1090,12 @@ async function initGL(){
      Loaded after the intro so it never blocks first paint.
   ========================================================== */
   let bust = null, bustReady = 0, bustH = 1.9;   // measured height of the export
-  const bustLook = {x:0, y:0};
+  const bustLook = {x:0, y:0};        // current yaw / pitch, eased toward the gaze
+  const bustPtr  = {x:0, y:0};        // its own pointer follow, quicker than the cloud's
   let bustSpinY = 0, bustSpinX = 0;   // the orientation you leave it in, kept
+  const LOOK_Z = 1.2;                 // depth of the plane the cursor is treated as on
+  const gazePt = new THREE.Vector3();
+  const gazeDir = new THREE.Vector3();
 
   // lit separately from the point clouds — additive points ignore lights,
   // so these only ever touch the marble
@@ -1168,9 +1172,29 @@ async function initGL(){
     // so the bust is fully lit at the top of the page and fades as you leave
     bustReady = lerp(bustReady, hero, .05);
 
-    // watch the pointer: yaw follows x, a little pitch from y
-    bustLook.y = lerp(bustLook.y, -sm.x * .78, .06);
-    bustLook.x = lerp(bustLook.x,  sm.y * .34, .06);
+    // ---- solve the real angle to the cursor ----
+    // Put the pointer on a plane between the camera and the bust, work out
+    // where that is in world space, then aim the head at it. The model faces
+    // +Z, so yaw is atan2 across x/z and pitch is the rise over the flat run.
+    bustPtr.x = lerp(bustPtr.x, ptr.x, .12);
+    bustPtr.y = lerp(bustPtr.y, ptr.y, .12);
+
+    gazePt.set(bustPtr.x, bustPtr.y, .5).unproject(cam);
+    gazeDir.copy(gazePt).sub(cam.position).normalize();
+    const tHit = (LOOK_Z - cam.position.z) / (gazeDir.z || -1);
+    gazePt.copy(cam.position).add(gazeDir.multiplyScalar(tHit));
+
+    const dx = gazePt.x - bust.position.x;
+    const dy = gazePt.y - bust.position.y;
+    const dz = gazePt.z - bust.position.z;
+    const flat = Math.hypot(dx, dz) || 1;
+
+    // a neck has limits — ±52° of yaw, ±26° of pitch
+    const yaw   = clamp(Math.atan2(dx, dz), -.91, .91);
+    const pitch = clamp(-Math.atan2(dy, flat), -.45, .45);
+
+    bustLook.y = lerp(bustLook.y, yaw,   .085);
+    bustLook.x = lerp(bustLook.x, pitch, .085);
 
     // the title's orbit springs back to face-on, but the head should stay
     // wherever you put it — so accumulate the same deltas without the return
