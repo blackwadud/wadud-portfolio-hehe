@@ -36,6 +36,21 @@ body:not(.gl-on) .hero-role{display:none}
 .row-cat,.row-yr{transform:translate3d(var(--tx2,0),0,0)}
 .row .stackline{transform:translate3d(var(--tx3,0),0,0)}
 
+
+/* ===== corner shortcuts, once the intro is out of the way ===== */
+.corner{position:fixed;bottom:22px;z-index:60;display:flex;align-items:center;gap:20px}
+.corner.cl{left:var(--gut)}
+.corner.cr{right:var(--gut)}
+.corner .jump{font-size:11px;letter-spacing:.16em;color:var(--dim);display:flex;align-items:center;
+  gap:10px;padding-bottom:3px;border-bottom:1px solid transparent;transition:.35s;
+  opacity:0;transform:translateY(8px);pointer-events:none}
+.corner .jump.show{opacity:1;transform:none;pointer-events:auto}
+.corner .jump:hover{color:var(--ink);border-bottom-color:var(--amber)}
+.corner .jump i{width:16px;height:1px;background:var(--dim);display:block;transition:.35s;flex:none}
+.corner .jump:hover i{background:var(--amber);width:26px}
+#form{position:static;left:auto;bottom:auto}
+@media(max-width:860px){.corner{display:none}}
+
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--void);color:var(--ink);font:300 17px/1.6 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -238,6 +253,7 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
   .row h3,.row-cat,.row-yr,.row .stackline,.job .co,.job h3,.job time,.job p{transform:none}
   body.gl-on .hero h1{position:static;width:auto;height:auto;clip:auto}
   .grab-hint::before{animation:none}
+  .corner .jump{opacity:1;transform:none;pointer-events:auto}
   .hero{cursor:auto}
 }
 </style>
@@ -255,7 +271,13 @@ footer b{font-weight:400;font-variant-numeric:tabular-nums}
 
 <div id="cur"></div><div id="dot"></div>
 <div id="bar"></div>
-<div id="form"><i></i><span id="formName">TITLE</span></div>
+<div class="corner cl" id="navL">
+  <a class="jump" href="#work"><i></i>Projects</a>
+  <div id="form"><i></i><span id="formName">TITLE</span></div>
+</div>
+<div class="corner cr" id="navR">
+  <a class="jump" href="#experience">Experience<i></i></a>
+</div>
 
 <div class="topbar">
   <div class="tb-id"><span class="tb-name">Abdulwadud Bakare</span><span class="tb-role">Systems Engineer</span></div>
@@ -1456,6 +1478,16 @@ Scroll.on((y, vel) => {
   document.getElementById('bar').style.width = (y / (Scroll.max() || 1) * 100) + '%';
 });
 
+// the corner links wait for the hero to clear, so they don't crowd the intro
+(function(){
+  const jumps = [...document.querySelectorAll('.corner .jump')];
+  if(!jumps.length) return;
+  Scroll.on(y => {
+    const on = y > innerHeight * .55;
+    for(const j of jumps) j.classList.toggle('show', on);
+  });
+})();
+
 const io = new IntersectionObserver(es => {
   es.forEach(e => {
     if(!e.isIntersecting) return;
@@ -1870,7 +1902,7 @@ const MQ_JA = "話しましょう <b></b> はじめまして <b></b> 一緒に�
 const I18N_SEL = '.tag, .hero-top, .cue, .grab-hint, .hero-role, .about h2, #moreBtn, .more p, .facts dt, .facts dd, ' +
   '.row-cat, .stackline, .row-links a, .job h3, .job .co, .job time, .job p, .exp-lead, ' +
   '.lat-lead, .lat-h, #padRef dt, .cta-lead p, .contact-grid dt, .contact-grid dd, ' +
-  '.contact-grid a, .topbar a.link';
+  '.contact-grid a, .topbar a.link, .corner .jump';
 
 function setLang(next){
   LANG = next;
